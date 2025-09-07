@@ -1,4 +1,5 @@
 import Asset from '../models/Asset.js';
+import { updateAssetPrices } from '../services/priceUpdater.js';
 
 export const createAsset = async (req, res) => {
     try {
@@ -45,6 +46,15 @@ export const deleteAsset = async (req, res) => {
         if (!asset) return res.status(404).json({ error: 'Asset not found' });
         await asset.destroy();
         res.json({ message: 'Asset deleted' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+export const runPriceUpdateManually = async (req, res) => {
+    try {
+        await updateAssetPrices();
+        res.json({ message: 'Prices updated successfully' });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

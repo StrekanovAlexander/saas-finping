@@ -10,13 +10,18 @@ const Asset = sequelize.define('Asset', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    externalId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
     type: {
         type: DataTypes.STRING, // crypto, fiat, commodity
         allowNull: false,
     },
-    externalId: {
-        type: DataTypes.STRING,
-        allowNull: true,
+    dataSource: {
+        type: DataTypes.ENUM('coingecko', 'exchangerate', 'yahoo'),
+        allowNull: false,
+        defaultValue: 'coingecko'
     },
     price: {
         type: DataTypes.DECIMAL(20, 8),
