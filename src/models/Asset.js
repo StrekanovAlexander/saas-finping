@@ -15,7 +15,7 @@ const Asset = sequelize.define('Asset', {
         allowNull: true,
     },
     type: {
-        type: DataTypes.STRING, // crypto, fiat, commodity
+        type: DataTypes.ENUM('crypto','fiat','commodity'),
         allowNull: false,
     },
     dataSource: {
