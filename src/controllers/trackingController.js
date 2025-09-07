@@ -1,5 +1,6 @@
 import Tracking from '../models/Tracking.js';
 import Asset from '../models/Asset.js';
+import { checkTrackings } from '../services/trackingService.js';
 
 export const createTracking = async (req, res) => {
     try {
@@ -49,4 +50,13 @@ export const deleteTracking = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
+};
+
+export const runTrackingsManually = async (req, res) => {
+  try {
+    await checkTrackings();
+    res.json({ message: 'Trackings checked manually' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
