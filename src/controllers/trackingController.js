@@ -1,0 +1,52 @@
+import Tracking from '../models/Tracking.js';
+import Asset from '../models/Asset.js';
+
+export const createTracking = async (req, res) => {
+    try {
+        const tracking = await Tracking.create(req.body);
+        res.status(201).json(tracking);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+export const getTrackings = async (req, res) => {
+    try {
+        const trackings = await Tracking.findAll({ include: Asset });
+        res.json(trackings);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+export const getTracking = async (req, res) => {
+    try {
+        const asset = await Tracking.findByPk(req.params.id);
+        if (!asset) return res.status(404).json({ error: 'Tracking not found' });
+        res.json(asset);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+export const updateTracking = async (req, res) => {
+    try {
+        const tracking = await Tracking.findByPk(req.params.id);
+        if (!tracking) return res.status(404).json({ error: 'Tracking not found' });
+        await tracking.update(req.body);
+        res.json(tracking);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+export const deleteTracking = async (req, res) => {
+    try {
+        const tracking = await Tracking.findByPk(req.params.id);
+        if (!tracking) return res.status(404).json({ error: 'Tracking not found' });
+        await tracking.destroy();
+        res.json({ message: 'Tracking deleted' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
