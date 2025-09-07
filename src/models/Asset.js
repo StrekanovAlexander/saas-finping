@@ -19,11 +19,15 @@ const Asset = sequelize.define('Asset', {
         allowNull: false,
     },
     dataSource: {
-        type: DataTypes.ENUM('coingecko', 'exchangerate', 'yahoo'),
+        type: DataTypes.ENUM('coingecko', 'exchangerate', 'yahoo', 'fxrates'),
         allowNull: false,
         defaultValue: 'coingecko'
     },
     price: {
+        type: DataTypes.DECIMAL(20, 8),
+        allowNull: true,
+    },
+    previousPrice: {
         type: DataTypes.DECIMAL(20, 8),
         allowNull: true,
     },

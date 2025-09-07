@@ -1,8 +1,8 @@
 import Asset from '../models/Asset.js';
 import { Op } from 'sequelize';
 import { fetchCoinGeckoPrices } from './apis/coingecko.js';
-import { fetchYahooPrices } from './apis/yahoo.js';
 import { fetchFXRates } from './apis/fxrates.js';
+import { fetchYahooPrices } from './apis/yahoo.js';
 
 export async function updateAssetPrices() {
     try {
@@ -23,6 +23,7 @@ export async function updateAssetPrices() {
         // --- CoinGecko update ---
         const updates = await fetchCoinGeckoPrices(bySource.coingecko);
         for (const { asset, price } of updates) {
+            asset.previousPrice = asset.price;
             asset.price = price;
             asset.lastUpdated = new Date();
             await asset.save();
@@ -32,6 +33,7 @@ export async function updateAssetPrices() {
         if (bySource.fxrates) {
             const updates = await fetchFXRates(bySource.fxrates);
             for (const { asset, price } of updates) {
+                asset.previousPrice = asset.price;
                 asset.price = price;
                 asset.lastUpdated = new Date();
                 await asset.save();
@@ -40,7 +42,14 @@ export async function updateAssetPrices() {
         }
         // --- Yahoo Finance update (stub for now) ---
         if (bySource.yahoo) {
-            await fetchYahooPrices(bySource.yahoo);
+            const results = await fetchYahooPrices(bySource.yahoo);
+            for (const { asset, price } of results) {
+                asset.previousPrice = asset.price;
+                asset.price = price;
+                asset.lastUpdated = new Date();
+                await asset.save();
+                console.log(`✅ [Yahoo] Updated ${asset.name} (${asset.symbol}) → $${price}`);
+            }
         }
     } catch (err) {
         console.error('❌ Error updating asset prices:', err.message);
