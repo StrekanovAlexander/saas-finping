@@ -3,7 +3,7 @@ import sequelize from './src/config/db.js';
 import assetRoutes from './src/routes/assetRoutes.js';
 import trackingRoutes from './src/routes/trackingRoutes.js';
 
-// import './src/cron/checkTrackings.js';
+import './src/cron/checkTrackings.js';
 
 const app = express();
 app.use(express.json());

@@ -23,10 +23,26 @@ const Tracking = sequelize.define('Tracking', {
         type: DataTypes.STRING, // 'email', 'telegram'
         allowNull: false,
         defaultValue: 'email',
-  },
-  active: {
+    },
+    active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
+    },
+    notificationsSent: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+    },
+    maxNotifications: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1,
+    },
+    lastNotifiedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
+    notificationIntervalMinutes: {
+        type: DataTypes.INTEGER,
+        defaultValue: 60,
     },
 }, {
     tableName: 'tracking',
