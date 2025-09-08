@@ -12,10 +12,10 @@ function Header() {
                 <Logo />
                 <NavTop />
                 <div className="flex items-center space-x-2">
-                    <button className="hidden md:flex items-center space-x-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                    <a href="/login" className="hidden md:flex items-center space-x-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
                         <LogIn className="w-5 h-5" />
-                        <span>Sign In</span>
-                    </button>
+                        <span>Log In</span>
+                    </a>
                     {/* Mobile menu button */}
                     <button className="md:hidden text-gray-700" onClick={() => setMenuOpen(!menuOpen)} >
                         {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
