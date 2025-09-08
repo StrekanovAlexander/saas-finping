@@ -1,4 +1,4 @@
-import Asset from '../models/Asset.js';
+import { Asset } from '../models/index.js';
 import { Op } from 'sequelize';
 import { fetchCoinGeckoPrices } from './apis/coingecko.js';
 import { fetchFXRates } from './apis/fxrates.js';

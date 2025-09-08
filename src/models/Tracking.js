@@ -1,15 +1,14 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
-import Asset from './Asset.js';
 
 const Tracking = sequelize.define('Tracking', {
     assetId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-            model: Asset,
-            key: 'id',
-        },
+    },
+    userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
     threshold: {
         type: DataTypes.DECIMAL(20,8),
@@ -45,10 +44,7 @@ const Tracking = sequelize.define('Tracking', {
         defaultValue: 60,
     },
 }, {
-    tableName: 'tracking',
+    tableName: 'trackings',
 });
-
-Asset.hasMany(Tracking, { foreignKey: 'assetId' });
-Tracking.belongsTo(Asset, { foreignKey: 'assetId' });
 
 export default Tracking;

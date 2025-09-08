@@ -1,5 +1,4 @@
-import Tracking from '../models/Tracking.js';
-import Asset from '../models/Asset.js';
+import { Asset, Tracking } from '../models/index.js';
 import { checkTrackings } from '../services/trackingService.js';
 
 export const createTracking = async (req, res) => {

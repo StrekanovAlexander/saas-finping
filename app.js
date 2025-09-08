@@ -2,6 +2,7 @@ import express from 'express';
 import sequelize from './src/config/db.js';
 import assetRoutes from './src/routes/assetRoutes.js';
 import trackingRoutes from './src/routes/trackingRoutes.js';
+import userRoutes from './src/routes/userRoutes.js';
 
 // import './src/cron/checkTrackings.js';
 // import './src/cron/updateAssets.js';
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/assets', assetRoutes);
 app.use('/api/trackings', trackingRoutes);
+app.use('/api/users', userRoutes);
 
 const PORT = process.env.PORT || 3000;
 

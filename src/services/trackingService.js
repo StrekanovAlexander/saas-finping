@@ -1,5 +1,4 @@
-import Tracking from '../models/Tracking.js';
-import Asset from '../models/Asset.js';
+import { Asset, Tracking } from '../models/index.js';
 
 /**
  * Check all active trackings and send alerts if conditions are met.

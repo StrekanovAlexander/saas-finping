@@ -1,4 +1,4 @@
-import Asset from '../models/Asset.js';
+import { Asset } from '../models/index.js';
 import { updateAssetPrices } from '../services/priceUpdater.js';
 
 export const createAsset = async (req, res) => {
