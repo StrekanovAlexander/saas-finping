@@ -1,3 +1,4 @@
+import cors from 'cors'
 import express from 'express';
 import sequelize from './src/config/db.js';
 import assetRoutes from './src/routes/assetRoutes.js';
@@ -8,6 +9,9 @@ import userRoutes from './src/routes/userRoutes.js';
 // import './src/cron/updateAssets.js';
 
 const app = express();
+
+app.use(cors({ origin: 'http://localhost:5173' }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
