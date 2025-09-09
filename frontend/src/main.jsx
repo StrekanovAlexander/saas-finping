@@ -15,9 +15,9 @@ import Footer from "./components/footer/Footer";
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50 flex flex-col items-center">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
         <Header />
-        <main className="flex justify-center max-w-6xl px-6">
+        <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
