@@ -141,7 +141,7 @@ function Register() {
           )}
         </div>
         {/* Button */}
-        <div className="flex justify-between">
+        <div className="flex justify-center">
           <button
             type="submit"
             className="md:flex items-center space-x-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"

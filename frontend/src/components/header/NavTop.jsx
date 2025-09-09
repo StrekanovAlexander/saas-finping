@@ -5,6 +5,7 @@ export default function() {
             <a href="/how-it-works" className="hover:text-indigo-600 transition">How it works</a>
             <a href="/faq" className="hover:text-indigo-600 transition">FAQ</a>
             <a href="/contacts" className="hover:text-indigo-600 transition">Contacts</a>
+            <a href="/dashboard" className="hover:text-indigo-600 transition">Dashboard</a>
         </nav>
     );
 }

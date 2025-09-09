@@ -6,7 +6,9 @@ import Home from "./pages/Home";
 import HowItWorks from "./pages/HowItWorks";
 import Faq from "./pages/Faq";
 import Contacts from "./pages/Contacts";
-import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import SignIn from "./pages/user/SignIn";
+import SignUp from './pages/User/SignUp';
 import Register from "./pages/Register";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
@@ -23,8 +25,10 @@ createRoot(document.getElementById('root')).render(
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/faq" element={<Faq />} />
             <Route path="/contacts" element={<Contacts />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/user/sign-in" element={<SignIn />} />
+            <Route path="/user/sign-up" element={<SignUp />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </main>
         <Footer />
