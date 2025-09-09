@@ -17,12 +17,16 @@ const User = sequelize.define('User', {
     },
     active: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true,
+        defaultValue: false,
     },
     role: {
         type: DataTypes.ENUM('user', 'admin'),
         defaultValue: 'user'
-    }
+    },
+    activationToken: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
 }, {
     tableName: 'users',
 });

@@ -5,7 +5,8 @@ import {
     getUser, 
     updateUser, 
     deleteUser,
-    changePasswordHash 
+    changePasswordHash,
+    activateUser 
 } from '../controllers/userController.js';
 
 const router = express.Router();
@@ -17,5 +18,6 @@ router.put('/:id', updateUser);
 router.delete('/:id', deleteUser);
 
 router.put('/:id/password', changePasswordHash);
+router.get('/activate/:token', activateUser); 
 
 export default router;

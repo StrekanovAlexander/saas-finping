@@ -1,16 +1,25 @@
 import bcrypt from 'bcrypt';
+import crypto from "crypto";
 import { User } from '../models/index.js';
+import { sendActivationEmail } from '../services/emailService.js';
 
 export async function createUser(req, res) {
     try {
-        const { email, passwordHash, telegramId } = req.body;
+        const { email, password, telegramId } = req.body;
 
         const existing = await User.findOne({ where: { email } });
+        
         if (existing) {
             return res.status(400).json({ error: 'Email already in use' });
         }
 
-        const user = await User.create({ email, passwordHash, telegramId });
+        const passwordHash = await bcrypt.hash(password, 10);
+        const activationToken = crypto.randomBytes(32).toString("hex");
+
+        const user = await User.create({ email, passwordHash, telegramId, activationToken });
+
+        // await sendActivationEmail(user.email, activationToken);
+
         res.status(201).json(user);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -104,3 +113,20 @@ export async function changePasswordHash(req, res) {
         res.status(500).json({ error: error.message });
     }
 }
+
+export async function activateUser (req, res) {
+    const { token } = req.params;
+    try {
+        const user = await User.findOne({ where: { activationToken: token } });
+        if (!user) return res.status(400).json({ message: "Invalid token" });
+
+        user.active = true;
+        user.activationToken = null;
+        await user.save();
+
+        res.status(200).json({ message: "Account activated successfully" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server error" });
+    }
+};
