@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 import Button from "./elements/Button";
 import Checkbox from "./elements/Checkbox";
 import { CheckCircle, XCircle } from "lucide-react";
@@ -8,10 +9,11 @@ function FormSignUp() {
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [subScribe, setSubScribe] = useState(false);
+    const [subscribe, setSubscribe] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordStrength, setPasswordStrength] = useState('');
     const [errors, setErrors] = useState({});
+    const [registered, setRegistered] = useState(false); 
     // PasswordStrength
      useEffect(() => {
         if (!password) {
@@ -70,23 +72,44 @@ function FormSignUp() {
         return '';
     };
 
-    function changeSubScribe() {
-        setSubScribe(!subScribe);
+    function changeSubscribe() {
+        setSubscribe(!subscribe);
     }
 
-    function handleSubmit(ev) {
+    async function handleSubmit(ev) {
         ev.preventDefault();
         validateField('email', email);
         validateField('password', password);
         validateField('confirmPassword', confirmPassword);
 
         if (!errors.email && !errors.password && !errors.confirmPassword && email && password && confirmPassword) {
-            alert('Data was sent');
+            try {
+                const url = `${import.meta.env.VITE_API_URL}/users`;
+                const res = await fetch(url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password, subscribe }),
+                });
+                
+                const data = await res.json();
+                
+                if (res.ok) {
+                    toast.success("User was created successfully!");
+                    setRegistered(true);
+                } else {
+                    toast.error(`${data.error || "Registration failed"}`);
+                }
+
+            } catch (err) {
+                console.error(err);
+                alert("Error registering user");
+            }
         }
     }
 
     return (
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto pt-12">
+            { !registered ? (
             <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -158,16 +181,28 @@ function FormSignUp() {
                         <Checkbox 
                             name="subScribe" 
                             title="I want to receive news by email" 
-                            checked={ subScribe }
-                            onChange={ changeSubScribe }
+                            checked={ subscribe }
+                            onChange={ changeSubscribe }
                         />
                         <Button title="Create an account" icon="UserPlus" />
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                             Already have an account? <Link to="/user/sign-in" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
                         </p>                        
                     </form>
+                    <Toaster position="top-right" />
                 </div>
             </div>
+            ) : (
+            <div className="bg-green-50 border border-green-300 text-green-800 p-6 rounded-lg shadow-md w-full max-w-md text-center">
+                <h2 className="text-2xl font-bold mb-4">Registration successful!</h2>
+                <p className="mb-4">
+                    Please check your email and click on the activation link to confirm your account.
+                </p>
+                <p className="text-sm text-gray-600">
+                    Didn't get the email? Check your spam folder or request a new activation link from the login page.
+                </p>
+            </div>
+        )}
         </div>
     )
 }
