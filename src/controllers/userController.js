@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import crypto from "crypto";
+import jwt from "jsonwebtoken";
 import { User } from '../models/index.js';
 import { sendActivationEmail } from '../services/emailService.js';
 
@@ -127,6 +128,37 @@ export async function activateUser (req, res) {
         res.status(200).json({ message: "Account activated successfully" });
     } catch (err) {
         console.error(err);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+export async function loginUser(req, res) {
+    try {
+        const { email, password } = req.body;
+        // check user
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+        // check active
+        if (!user.active) {
+            return res.status(403).json({ message: "Please activate your account" });
+        }
+        // check password
+        const validPassword = await bcrypt.compare(password, user.passwordHash);
+        if (!validPassword) {
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+        // create JWT
+        const token = jwt.sign(
+            { id: user.id, email: user.email, role: user.role },
+            process.env.JWT_SECRET || "supersecret",
+            { expiresIn: "1h" }
+        );
+
+        res.json({ message: "Login successful", token });
+    } catch (err) {
+        console.error("Login error:", err);
         res.status(500).json({ message: "Server error" });
     }
 };

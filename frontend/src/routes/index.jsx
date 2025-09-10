@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute"; 
 import { 
     Home, 
     HowItWorks,
@@ -16,7 +17,14 @@ export default function() {
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/user/sign-in" element={<SignIn />} />
             <Route path="/user/sign-up" element={<SignUp />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+                path="/user/dashboard"
+                element={
+                    <PrivateRoute>
+                        <Dashboard />
+                    </PrivateRoute>
+                }
+            />
         </Routes>
     );
 }

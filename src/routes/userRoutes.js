@@ -6,7 +6,8 @@ import {
     updateUser, 
     deleteUser,
     changePasswordHash,
-    activateUser 
+    activateUser,
+    loginUser 
 } from '../controllers/userController.js';
 
 const router = express.Router();
@@ -19,5 +20,6 @@ router.delete('/:id', deleteUser);
 
 router.put('/:id/password', changePasswordHash);
 router.get('/activate/:token', activateUser); 
+router.post("/login", loginUser);
 
 export default router;

@@ -1,10 +1,14 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { useAuth } from "../../context/AuthContext";
 import Button from "./elements/Button";
 import Checkbox from "./elements/Checkbox";
 import { CheckCircle, XCircle } from "lucide-react";
 
 function FormSignIn() {
+    const { login } = useAuth();
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [stayLogged, setStayLogged] = useState(false);
@@ -44,10 +48,28 @@ function FormSignIn() {
         setStayLogged(!stayLogged);
     }
 
-    function handleSubmit(ev) {
+    async function handleSubmit(ev) {
         ev.preventDefault();
-        if (!errors.email && !errors.password && email && password) {
-            alert('Data was sent');
+        try {
+            const url = `${import.meta.env.VITE_API_URL}/users/login`;
+            const res = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await res.json();
+            if (!res.ok) {
+                toast.error(data.message || "Login failed");
+                return;
+            }
+ 
+            login(data.token);
+            toast.success("Welcome back!");
+            navigate("/user/dashboard");
+        } catch (err) {
+            console.error(err);
+            toast.error("Server error");
         }
     }
 
@@ -107,6 +129,7 @@ function FormSignIn() {
                             Don't have an account? <Link to="/user/sign-up" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Create an account</Link>
                         </p>
                     </form>
+                    <Toaster position="top-right" />
                 </div>
             </div>
         </div>
