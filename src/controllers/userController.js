@@ -5,7 +5,7 @@ import { sendActivationEmail } from '../services/emailService.js';
 
 export async function createUser(req, res) {
     try {
-        const { email, password, telegramId } = req.body;
+        const { email, password, telegramId, subscribe } = req.body;
 
         const existing = await User.findOne({ where: { email } });
         
@@ -16,7 +16,7 @@ export async function createUser(req, res) {
         const passwordHash = await bcrypt.hash(password, 10);
         const activationToken = crypto.randomBytes(32).toString("hex");
 
-        const user = await User.create({ email, passwordHash, telegramId, activationToken });
+        const user = await User.create({ email, passwordHash, telegramId, subscribe, activationToken });
 
         // await sendActivationEmail(user.email, activationToken);
 
