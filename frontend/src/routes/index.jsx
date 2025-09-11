@@ -9,7 +9,8 @@ import {
     SignUp,
     SignOut,
     UserAccount, 
-    Assets
+    Assets,
+    Trackings
 } from "../pages";
 
 export default function() {
@@ -49,6 +50,14 @@ export default function() {
                 element={
                     <PrivateRoute>
                         <Assets />
+                    </PrivateRoute>
+                }
+            />
+            <Route
+                path="/user/trackings"
+                element={
+                    <PrivateRoute>
+                        <Trackings />
                     </PrivateRoute>
                 }
             />

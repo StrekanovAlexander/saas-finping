@@ -5,7 +5,8 @@ import {
     getTracking,
     updateTracking,
     deleteTracking,
-    runTrackingsManually
+    runTrackingsManually,
+    getUserTrackings
 } from '../controllers/trackingController.js';
 
 const router = express.Router();
@@ -15,6 +16,8 @@ router.get('/', getTrackings);
 router.get('/:id', getTracking);
 router.put('/:id', updateTracking);
 router.delete('/:id', deleteTracking);
+
+router.get('/user/:userId', getUserTrackings);
 
 router.post('/run', runTrackingsManually);
 

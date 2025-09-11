@@ -1,29 +1,14 @@
-import { useState } from "react";
-import { CirclePlus } from 'lucide-react';
 import Heading from "../../components/dashboard/elements/Heading";
 import Sidebar from "../../components/dashboard/Sidebar";
-import TrackingsList from "../../components/dashboard/TrackingsList";
-import CreateTrackingModal from "../../components/dashboard/CreateTrackingModal";
 
 function Dashboard() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
     return (
         <div className="flex min-h-screen bg-gray-50">
             <Sidebar />
             <div className="flex-1 p-6">
                 <div className="flex items-center justify-between mb-6">
-                    <Heading title="My Trackings"/>
-                    <button
-                        onClick={() => setIsModalOpen(true)}
-                        className="flex px-4 py-2 bg-emerald-600 text-white text-sm rounded-lg hover:bg-emerald-700"
-                    >
-                        <CirclePlus className="w-5 h-5 mr-1" /> New Tracking
-                    </button>
+                    <Heading title="Dashboard"/>
                 </div>
-                <TrackingsList />
-                {isModalOpen && (
-                    <CreateTrackingModal onClose={() => setIsModalOpen(false)} />
-                )}
             </div>
         </div>    
     )

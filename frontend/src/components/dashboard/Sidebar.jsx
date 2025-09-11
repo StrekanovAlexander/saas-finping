@@ -6,10 +6,10 @@ function Sidebar() {
 
     const navItems = [
         { name: "Dashboard", path: "/user/dashboard", icon: <Home size={18} /> },
-        { name: "My Account", path: "/user/account", icon: <User size={18} /> },
         { name: "Trackings", path: "/user/trackings", icon: <BarChart2 size={18} /> },
         { name: "Assets", path: "/user/assets", icon: <Layers size={18} /> },
         { name: "Settings", path: "/user/settings", icon: <Settings size={18} /> },
+        { name: "My Account", path: "/user/account", icon: <User size={18} /> },
     ];
 
     return (

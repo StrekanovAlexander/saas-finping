@@ -59,3 +59,20 @@ export const runTrackingsManually = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const getUserTrackings = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        if (!userId) {
+            return res.status(400).json({ message: "User id is required" });
+        }
+        const trackings = await Tracking.findAll({ 
+            where: { userId },
+            order: [["createdAt", "DESC"]], 
+            include: Asset 
+        });
+        res.json(trackings);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};

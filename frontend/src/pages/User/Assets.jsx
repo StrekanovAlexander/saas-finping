@@ -69,7 +69,7 @@ function Assets() {
                 <div className="overflow-x-auto">
                     <table className="min-w-full bg-white border border-gray-200">
                         <thead className="bg-gray-50">
-                            <tr class="text-left">
+                            <tr className="text-left">
                                 <th
                                     className="px-4 py-2 cursor-pointer"
                                     onClick={() => requestSort("name")}

@@ -8,6 +8,7 @@ import SignUp from "./user/SignUp";
 import SignOut from "./user/SignOut";
 import UserAccount from "./user/UserAccount";
 import Assets from "./user/Assets";
+import Trackings from "./user/Trackings";
 
 export { 
     Home, 
@@ -18,5 +19,6 @@ export {
     SignUp,
     SignOut,
     UserAccount,
-    Assets
+    Assets,
+    Trackings
 };

@@ -70,7 +70,7 @@ function FormSignIn() {
       login(data.user, data.token);
       toast.success("Welcome back!");
 
-      navigate("/user/dashboard");
+      navigate("/user/trackings");
     } catch (err) {
       console.error(err);
       toast.error("Server error");
