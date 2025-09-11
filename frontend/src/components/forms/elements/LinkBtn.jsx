@@ -13,7 +13,7 @@ export default function({ title, icon, url, hidden }) {
             iconBtn = null;    
     }
 
-    const classOptions = "flex justify-center align-center px-2 py-1.5 bg-white text-sm text-emerald-500 border border-emerald-500 rounded-lg hover:bg-emerald-600 hover:text-white transition";
+    const classOptions = "flex justify-center align-center px-4 py-2 bg-white text-sm text-emerald-500 border border-emerald-500 rounded-lg hover:bg-emerald-600 hover:text-white transition";
 
     return (
         <a href={ url } title="Sign in" className={ hidden ? 'hidden md:' + classOptions : classOptions }>

@@ -7,7 +7,8 @@ import {
     Dashboard, 
     SignIn, 
     SignUp,
-    SignOut 
+    SignOut,
+    UserAccount, 
 } from "../pages";
 
 export default function() {
@@ -31,6 +32,14 @@ export default function() {
                 element={
                     <PrivateRoute>
                         <SignOut />
+                    </PrivateRoute>
+                }
+            />
+            <Route
+                path="/user/account"
+                element={
+                    <PrivateRoute>
+                        <UserAccount />
                     </PrivateRoute>
                 }
             />

@@ -7,26 +7,41 @@ export function useAuth() {
 }
 
 function AuthProvider({ children }) {
-  const [isAuth, setIsAuth] = useState(() => {
-    return localStorage.getItem("isAuth") === "true";
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
   });
+  const [token, setToken] = useState(() => {
+    return localStorage.getItem("token") || null;
+  });
+  const [loading, setLoading] = useState(true);
 
-  const login = () => {
-    setIsAuth(true);
-    localStorage.setItem("isAuth", "true");
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  const login = (newUser, newToken) => {
+    if (!newUser || !newToken) {
+      console.error("Missing user or token in login()");
+      return;
+    }
+
+    setUser(newUser);
+    setToken(newToken);
+
+    localStorage.setItem("user", JSON.stringify(newUser));
+    localStorage.setItem("token", newToken);
   };
 
   const logout = () => {
-    setIsAuth(false);
-    localStorage.removeItem("isAuth");
+    setUser(null);
+    setToken(null);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
 
-  useEffect(() => {
-    console.log("Auth state:", isAuth);
-  }, [isAuth]);
-
   return (
-    <AuthContext.Provider value={{ isAuth, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

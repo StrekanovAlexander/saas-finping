@@ -6,6 +6,7 @@ import Dashboard from "./user/Dashboard";
 import SignIn from "./user/SignIn";
 import SignUp from "./user/SignUp";
 import SignOut from "./user/SignOut";
+import UserAccount from "./user/UserAccount";
 
 export { 
     Home, 
@@ -14,5 +15,6 @@ export {
     Dashboard,
     SignIn,
     SignUp,
-    SignOut
+    SignOut,
+    UserAccount
 };
