@@ -5,6 +5,7 @@ import Contacts from "./static/Contacts";
 import Dashboard from "./user/Dashboard";
 import SignIn from "./user/SignIn";
 import SignUp from "./user/SignUp";
+import SignOut from "./user/SignOut";
 
 export { 
     Home, 
@@ -12,5 +13,6 @@ export {
     Contacts, 
     Dashboard,
     SignIn,
-    SignUp
+    SignUp,
+    SignOut
 };

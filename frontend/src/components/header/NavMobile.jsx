@@ -16,7 +16,7 @@ export default function({ isAuth, logout }) {
                     <button
                         className="flex justify-center align-center px-4 py-1.5 bg-white text-sm text-red-400 border border-red-300 rounded-lg hover:bg-red-500 hover:text-white transition"
                         onClick={ logout }
-                    ><LogOut className="w-5 h-5 mr-1" />Log Out</button>
+                    ><LogOut className="w-5 h-5 mr-1" />Sign Out</button>
                 )}    
             </nav>
         </div>

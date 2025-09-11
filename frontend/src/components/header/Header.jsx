@@ -22,7 +22,7 @@ function Header() {
                         <button
                             onClick={logout}
                             className="hidden md:flex px-2 py-1.5 bg-white text-sm text-red-400 border border-red-300 rounded-lg hover:bg-red-500 hover:text-white transition"
-                        ><LogOut className="w-5 h-5" /> Log Out</button>
+                        ><LogOut className="w-5 h-5" />Sign Out</button>
                     )}
                                         
                     {/* Mobile menu button */}
