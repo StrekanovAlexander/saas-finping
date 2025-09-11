@@ -1,5 +1,4 @@
-import Heading from "../../components/dashboard/elements/Heading";
-import Sidebar from "../../components/dashboard/Sidebar";
+import { PageTitle, Sidebar } from "./components";
 
 function Dashboard() {
     return (
@@ -7,7 +6,7 @@ function Dashboard() {
             <Sidebar />
             <div className="flex-1 p-6">
                 <div className="flex items-center justify-between mb-6">
-                    <Heading title="Dashboard"/>
+                    <PageTitle title="Dashboard"/>
                 </div>
             </div>
         </div>    

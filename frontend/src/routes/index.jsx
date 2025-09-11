@@ -10,7 +10,8 @@ import {
     SignOut,
     UserAccount, 
     Assets,
-    Trackings
+    Trackings,
+    Settings
 } from "../pages";
 
 export default function() {
@@ -22,7 +23,7 @@ export default function() {
             <Route path="/user/sign-in" element={<SignIn />} />
             <Route path="/user/sign-up" element={<SignUp />} />
             <Route
-                path="/user/dashboard"
+                path="/dashboard/dashboard"
                 element={
                     <PrivateRoute>
                         <Dashboard />
@@ -38,7 +39,7 @@ export default function() {
                 }
             />
             <Route
-                path="/user/account"
+                path="/dashboard/account"
                 element={
                     <PrivateRoute>
                         <UserAccount />
@@ -46,7 +47,7 @@ export default function() {
                 }
             />
             <Route
-                path="/user/assets"
+                path="/dashboard/assets"
                 element={
                     <PrivateRoute>
                         <Assets />
@@ -54,10 +55,18 @@ export default function() {
                 }
             />
             <Route
-                path="/user/trackings"
+                path="/dashboard/trackings"
                 element={
                     <PrivateRoute>
                         <Trackings />
+                    </PrivateRoute>
+                }
+            />
+            <Route
+                path="/dashboard/settings"
+                element={
+                    <PrivateRoute>
+                        <Settings />
                     </PrivateRoute>
                 }
             />

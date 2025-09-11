@@ -2,13 +2,15 @@ import Home from "./static/Home";
 import HowItWorks from "./static/HowItWorks";
 import Contacts from "./static/Contacts";
 
-import Dashboard from "./user/Dashboard";
+import Assets from "./dashboard/Assets";
+import Dashboard from "./dashboard/Dashboard";
+import Trackings from "./dashboard/Trackings";
+import UserAccount from "./dashboard/UserAccount";
+import Settings from "./dashboard/Settings";
+
 import SignIn from "./user/SignIn";
 import SignUp from "./user/SignUp";
 import SignOut from "./user/SignOut";
-import UserAccount from "./user/UserAccount";
-import Assets from "./user/Assets";
-import Trackings from "./user/Trackings";
 
 export { 
     Home, 
@@ -20,5 +22,6 @@ export {
     SignOut,
     UserAccount,
     Assets,
-    Trackings
+    Trackings,
+    Settings
 };

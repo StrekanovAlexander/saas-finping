@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../../components/dashboard/Sidebar";
-import Heading from "../../components/dashboard/elements/Heading";
+import { PageTitle, Sidebar } from "./components";
 
 const formatNumber = (value) => {
     if (value === null || value === undefined) return "-";
@@ -65,7 +64,7 @@ function Assets() {
         <div className="flex min-h-screen bg-gray-50">
             <Sidebar />
             <div className="flex-1 p-6">
-                <Heading title="Assets"/>
+                <PageTitle title="Assets"/>
                 <div className="overflow-x-auto">
                     <table className="min-w-full bg-white border border-gray-200">
                         <thead className="bg-gray-50">

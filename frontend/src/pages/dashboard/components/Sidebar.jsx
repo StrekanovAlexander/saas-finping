@@ -1,15 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, User, BarChart2, Settings, TrendingUp, Layers  } from "lucide-react";
+import { Home, User, BarChart2, Settings, Layers  } from "lucide-react";
 
 function Sidebar() {
     const location = useLocation();
 
     const navItems = [
-        { name: "Dashboard", path: "/user/dashboard", icon: <Home size={18} /> },
-        { name: "Trackings", path: "/user/trackings", icon: <BarChart2 size={18} /> },
-        { name: "Assets", path: "/user/assets", icon: <Layers size={18} /> },
-        { name: "Settings", path: "/user/settings", icon: <Settings size={18} /> },
-        { name: "My Account", path: "/user/account", icon: <User size={18} /> },
+        { name: "Dashboard", path: "/dashboard/dashboard", icon: <Home size={18} /> },
+        { name: "Trackings", path: "/dashboard/trackings", icon: <BarChart2 size={18} /> },
+        { name: "Assets", path: "/dashboard/assets", icon: <Layers size={18} /> },
+        { name: "Settings", path: "/dashboard/settings", icon: <Settings size={18} /> },
+        { name: "Account", path: "/dashboard/account", icon: <User size={18} /> },
     ];
 
     return (
