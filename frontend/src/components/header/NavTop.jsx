@@ -4,7 +4,7 @@ export default function({ user }) {
             <a href="/" className="hover:text-emerald-600 transition">Home</a>
             <a href="/how-it-works" className="hover:text-emerald-600 transition">How it works</a>
             <a href="/contacts" className="hover:text-emerald-600 transition">Contacts</a>
-            { user && <a href="/user/dashboard" className="hover:text-emerald-600 transition">Dashboard</a> }
+            { user && <a href="/dashboard/dashboard" className="hover:text-emerald-600 transition">Dashboard</a> }
         </nav>
     );
 }
