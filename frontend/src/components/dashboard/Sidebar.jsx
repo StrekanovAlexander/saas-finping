@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, User, BarChart2, Settings } from "lucide-react";
+import { Home, User, BarChart2, Settings, TrendingUp, Layers  } from "lucide-react";
 
 function Sidebar() {
     const location = useLocation();
@@ -8,12 +8,13 @@ function Sidebar() {
         { name: "Dashboard", path: "/user/dashboard", icon: <Home size={18} /> },
         { name: "My Account", path: "/user/account", icon: <User size={18} /> },
         { name: "Trackings", path: "/user/trackings", icon: <BarChart2 size={18} /> },
+        { name: "Assets", path: "/user/assets", icon: <Layers size={18} /> },
         { name: "Settings", path: "/user/settings", icon: <Settings size={18} /> },
     ];
 
     return (
         <div className="w-64 bg-white border-r shadow-md p-4">
-            <h2 className="text-xl font-bold mb-6">FinPing</h2>
+            <h2 className="text-xl font-bold mb-6">Control panel</h2>
             <nav className="space-y-2">
                 {navItems.map((item) => (
                     <Link

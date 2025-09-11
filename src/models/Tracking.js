@@ -15,11 +15,11 @@ const Tracking = sequelize.define('Tracking', {
         allowNull: false,
     },
     direction: {
-        type: DataTypes.ENUM('above','below'), // 'above' = price > threshold, 'below' = price < threshold
+        type: DataTypes.ENUM('above','below'),
         allowNull: false,
     },
     channel: {
-        type: DataTypes.STRING, // 'email', 'telegram'
+        type: DataTypes.ENUM('email', 'telegram'),
         allowNull: false,
         defaultValue: 'email',
     },

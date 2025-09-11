@@ -12,7 +12,7 @@ export const createAsset = async (req, res) => {
 
 export const getAssets = async (req, res) => {
     try {
-        const assets = await Asset.findAll();
+        const assets = await Asset.findAll({ order: ['name']});
         res.json(assets);
     } catch (err) {
         res.status(500).json({ error: err.message });
