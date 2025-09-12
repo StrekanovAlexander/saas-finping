@@ -1,9 +1,9 @@
 import cors from 'cors'
 import express from 'express';
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv from "dotenv";
+// dotenv.config();
 
-// import sequelize from './src/config/db.js';
+import sequelize from './src/config/db.js';
 // import assetRoutes from './src/routes/assetRoutes.js';
 // import trackingRoutes from './src/routes/trackingRoutes.js';
 // import userRoutes from './src/routes/userRoutes.js';
@@ -17,14 +17,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.json({
-    HOST: process.env.HOST,
-    DB_USER: process.env.DB_USER,
-    DB_PASSWORD: process.env.DB_PASSWORD,
-    DB_NAME: process.env.DB_NAME,
-    DB_PORT: process.env.DB_PORT,
-    JWT_SECRET: process.env.JWT_SECRET,
-  });
+  res.json({ message: 'Backend is running!' });
+});
+
+app.get("/test-db", async (req, res) => {
+  try {
+    await sequelize.authenticate();
+    res.json({ success: true, message: "Database connected!" });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
 });
 
 // app.use('/api/assets', assetRoutes);
