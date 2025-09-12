@@ -5,7 +5,7 @@ import {
     HowItWorks,
     Contacts,
     Dashboard, 
-    // SignIn, 
+    SignIn, 
     // SignUp,
     // SignOut,
     UserAccount, 
@@ -20,8 +20,8 @@ export default function() {
             <Route path="/" element={<Home />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/contacts" element={<Contacts />} />
-            {/* <Route path="/user/sign-in" element={<SignIn />} />
-            <Route path="/user/sign-up" element={<SignUp />} /> */}
+            <Route path="/user/sign-in" element={<SignIn />} />
+            {/* <Route path="/user/sign-up" element={<SignUp />} /> */}
             <Route
                 path="/dashboard/dashboard"
                 element={
