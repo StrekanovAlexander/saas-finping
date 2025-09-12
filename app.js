@@ -24,7 +24,7 @@ app.get("/test-db", async (req, res) => {
     const sequelize = getSequelize();
     // console.log(sequelize);
     await sequelize.authenticate();
-    res.json({ success: true, message: "Database connected!" });
+    res.json({ success: true, message: "Database connected!!!" });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
