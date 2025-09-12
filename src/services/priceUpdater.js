@@ -1,5 +1,6 @@
+import pkg from 'sequelize';
+const { Op } = pkg;
 import { Asset } from '../models/index.js';
-import { Op } from 'sequelize';
 import { fetchCoinGeckoPrices } from './apis/coingecko.js';
 import { fetchFXRates } from './apis/fxrates.js';
 import { fetchYahooPrices } from './apis/yahoo.js';
