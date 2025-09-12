@@ -17,12 +17,12 @@ function Header() {
                 <NavTop user={ user } />
                 <div className="flex items-center space-x-2">
                     {!user ? (
-                        <LinkBtn title="Sign in" icon="LogIn" url="/login" hidden={ true } />
+                        <LinkBtn title="Login" icon="LogIn" url="/login" hidden={ true } />
                     ) : (
                         <button
                             onClick={logout}
                             className="hidden md:flex px-4 py-2 bg-white text-sm text-red-400 border border-red-300 rounded-lg hover:bg-red-500 hover:text-white transition"
-                        ><LogOut className="w-5 h-5" />Sign Out</button>
+                        ><LogOut className="w-5 h-5" />Logout</button>
                     )}
                                         
                     {/* Mobile menu button */}
