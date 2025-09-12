@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import Button from "./elements/Button";
-import Checkbox from "./elements/Checkbox";
+import Button from "./elements/Button.jsx";
+import Checkbox from "./elements/Checkbox.jsx";
 import { CheckCircle, XCircle } from "lucide-react";
 
 function FormSignUp() {

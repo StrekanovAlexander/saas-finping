@@ -1,4 +1,4 @@
-import { PageTitle, Sidebar } from "./components";
+import { PageTitle, Sidebar } from "./components/index.jsx";
 
 function Dashboard() {
     return (

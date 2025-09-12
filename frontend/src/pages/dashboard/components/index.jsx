@@ -1,5 +1,5 @@
-import CreateTrackingModal from "./CreateTrackingModal";
-import PageTitle from "./PageTitle";
-import Sidebar from "./Sidebar";
+import CreateTrackingModal from "./CreateTrackingModal.jsx";
+import PageTitle from "./PageTitle.jsx";
+import Sidebar from "./Sidebar.jsx";
 
 export { PageTitle, Sidebar, CreateTrackingModal };

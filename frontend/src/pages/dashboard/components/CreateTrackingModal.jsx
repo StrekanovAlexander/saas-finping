@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { CircleX, Save } from "lucide-react";
 import toast from "react-hot-toast";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../../../context/AuthContext.jsx";
 
 function CreateTrackingModal({ onClose, onCreate }) {
   const { user } = useAuth();

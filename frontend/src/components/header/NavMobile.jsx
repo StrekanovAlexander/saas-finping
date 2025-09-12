@@ -1,4 +1,4 @@
-import LinkBtn from '../forms/elements/LinkBtn';
+import LinkBtn from '../forms/elements/LinkBtn.jsx';
 import { LogOut } from 'lucide-react';
 
 <LogOut />

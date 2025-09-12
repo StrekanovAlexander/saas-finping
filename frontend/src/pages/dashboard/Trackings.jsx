@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { CirclePlus, CheckCircle, XCircle } from 'lucide-react';
 import toast from "react-hot-toast";
-import { useAuth } from "../../context/AuthContext";
-import { PageTitle, Sidebar, CreateTrackingModal } from "./components";
+import { useAuth } from "../../context/AuthContext.jsx";
+import { PageTitle, Sidebar, CreateTrackingModal } from "./components/index.jsx";
 
 const formatNumber = (value) => {
     if (value === null || value === undefined) return "-";

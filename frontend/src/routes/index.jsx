@@ -12,7 +12,7 @@ import {
     Assets,
     Trackings,
     Settings
-} from "../pages";
+} from "../pages/index.jsx";
 
 export default function() {
     return (

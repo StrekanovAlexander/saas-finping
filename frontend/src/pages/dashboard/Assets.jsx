@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PageTitle, Sidebar } from "./components";
+import { PageTitle, Sidebar } from "./components/index.jsx";
 
 const formatNumber = (value) => {
     if (value === null || value === undefined) return "-";

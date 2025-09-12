@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { LogOut, Menu, X } from 'lucide-react';
-import { useAuth } from "../../context/AuthContext";
-import Logo from './Logo';
-import NavTop from './NavTop';
-import NavMobile from './NavMobile';
-import LinkBtn from '../forms/elements/LinkBtn';
+import { useAuth } from "../../context/AuthContext.jsx";
+import Logo from './Logo.jsx';
+import NavTop from './NavTop.jsx';
+import NavMobile from './NavMobile.jsx';
+import LinkBtn from '../forms/elements/LinkBtn.jsx';
 
 function Header() {
     const { user, logout } = useAuth();

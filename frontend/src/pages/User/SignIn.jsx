@@ -1,4 +1,4 @@
-import FormSignIn from "../../components/forms/FormSignIn";
+import FormSignIn from "../../components/forms/FormSignIn.jsx";
 
 function SignIn() {
     return (

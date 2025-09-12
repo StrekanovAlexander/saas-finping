@@ -1,9 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from "react-router-dom";
-import AuthProvider from "./context/AuthContext";
-import Routing from "./routes";
-import { Header, Footer } from './components';
+import AuthProvider from "./context/AuthContext.jsx";
+import Routing from "./routes/index.jsx";
+import { Header, Footer } from './components/index.jsx';
 import './index.css';
 
 createRoot(document.getElementById('root')).render(

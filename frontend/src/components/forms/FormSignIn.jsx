@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { useAuth } from "../../context/AuthContext";
-import Button from "./elements/Button";
-import Checkbox from "./elements/Checkbox";
 import { CheckCircle, XCircle } from "lucide-react";
+import { useAuth } from "../../context/AuthContext.jsx";
+import Button from "./elements/Button.jsx";
+import Checkbox from "./elements/Checkbox.jsx";
 
 function FormSignIn() {
   const { login } = useAuth();
