@@ -15,14 +15,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const sequelize = getSequelize();
+
 app.get('/', (req, res) => {
   res.json({ message: 'Backend is running!' });
 });
 
 app.get("/test-db", async (req, res) => {
   try {
-    const sequelize = getSequelize();
-    // console.log(sequelize);
     await sequelize.authenticate();
     res.json({ success: true, message: "Database connected!!!" });
   } catch (err) {
@@ -38,6 +38,7 @@ const PORT = process.env.PORT || 3000;
 
 try {
     // await sequelize.sync();
+    await sequelize.authenticate();
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
     });
