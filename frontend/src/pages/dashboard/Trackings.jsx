@@ -13,13 +13,18 @@ const formatNumber = (value) => {
 };
 
 function Trackings() {
-    const { user } = useAuth();
+    const { user, token } = useAuth();
     const [trackings, setTrackings] = useState([]);
     const [showModal, setShowModal] = useState(false);
 
     async function fetchTrackings() {
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/trackings/user/${user.id}`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/trackings/user/me`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
             const data = await res.json();
             if (!res.ok) throw new Error(data.message || "Failed to load trackings");
             setTrackings(data);

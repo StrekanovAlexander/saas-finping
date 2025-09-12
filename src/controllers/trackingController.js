@@ -62,10 +62,7 @@ export const runTrackingsManually = async (req, res) => {
 
 export const getUserTrackings = async (req, res) => {
     try {
-        const { userId } = req.params;
-        if (!userId) {
-            return res.status(400).json({ message: "User id is required" });
-        }
+        const userId = req.user.id;
         const trackings = await Tracking.findAll({ 
             where: { userId },
             order: [["createdAt", "DESC"]], 

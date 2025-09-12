@@ -1,4 +1,6 @@
 import express from 'express';
+import { authMiddleware } from "../middleware/authMiddleware.js";
+
 import {
     createTracking,
     getTrackings,
@@ -17,7 +19,8 @@ router.get('/:id', getTracking);
 router.put('/:id', updateTracking);
 router.delete('/:id', deleteTracking);
 
-router.get('/user/:userId', getUserTrackings);
+// router.get('/user/:userId', getUserTrackings);
+router.get('/user/me', authMiddleware, getUserTrackings);
 
 router.post('/run', runTrackingsManually);
 
