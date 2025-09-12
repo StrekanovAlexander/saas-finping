@@ -1,9 +1,8 @@
 import cors from 'cors'
 import express from 'express';
-// import dotenv from "dotenv";
-// dotenv.config();
+import { getSequelize } from "./src/config/db.js";
 
-import sequelize from './src/config/db.js';
+// import sequelize from './src/config/db.js';
 // import assetRoutes from './src/routes/assetRoutes.js';
 // import trackingRoutes from './src/routes/trackingRoutes.js';
 // import userRoutes from './src/routes/userRoutes.js';
@@ -22,7 +21,9 @@ app.get('/', (req, res) => {
 
 app.get("/test-db", async (req, res) => {
   try {
-    // await sequelize.authenticate();
+    const sequelize = getSequelize();
+    // console.log(sequelize);
+    await sequelize.authenticate();
     res.json({ success: true, message: "Database connected!" });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
