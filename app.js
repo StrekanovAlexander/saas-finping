@@ -1,6 +1,6 @@
 import cors from 'cors'
 import express from 'express';
-// import sequelize from './src/config/db.js';
+import sequelize from './src/config/db.js';
 // import assetRoutes from './src/routes/assetRoutes.js';
 // import trackingRoutes from './src/routes/trackingRoutes.js';
 // import userRoutes from './src/routes/userRoutes.js';
@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 try {
-    // await sequelize.sync();
+    await sequelize.sync();
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
     });
