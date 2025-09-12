@@ -1,6 +1,9 @@
 import cors from 'cors'
 import express from 'express';
-import sequelize from './src/config/db.js';
+import dotenv from "dotenv";
+dotenv.config();
+
+// import sequelize from './src/config/db.js';
 // import assetRoutes from './src/routes/assetRoutes.js';
 // import trackingRoutes from './src/routes/trackingRoutes.js';
 // import userRoutes from './src/routes/userRoutes.js';
@@ -14,7 +17,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.json({ message: 'Backend is running!' });
+    res.json({
+    HOST: process.env.HOST,
+    DB_USER: process.env.DB_USER,
+    DB_PASSWORD: process.env.DB_PASSWORD,
+    DB_NAME: process.env.DB_NAME,
+    DB_PORT: process.env.DB_PORT,
+    JWT_SECRET: process.env.JWT_SECRET,
+  });
 });
 
 // app.use('/api/assets', assetRoutes);
@@ -24,7 +34,7 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 try {
-    await sequelize.sync();
+    // await sequelize.sync();
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
     });
