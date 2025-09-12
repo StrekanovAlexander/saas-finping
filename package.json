@@ -23,8 +23,5 @@
     "node-cron": "^4.2.1",
     "nodemailer": "^7.0.6",
     "sequelizer": "^1.1.4"
-  },
-  "engines": {
-    "node": "18.x"
   }
 }
