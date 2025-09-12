@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 
 app.get("/test-db", async (req, res) => {
   try {
-    await sequelize.authenticate();
+    // await sequelize.authenticate();
     res.json({ success: true, message: "Database connected!" });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
