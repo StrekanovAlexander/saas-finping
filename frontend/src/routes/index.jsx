@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import PrivateRoute from "./PrivateRoute"; 
+import PrivateRoute from "./PrivateRoute.jsx"; 
 import { 
     Home, 
     HowItWorks,
