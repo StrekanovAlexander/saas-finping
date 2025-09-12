@@ -5,9 +5,9 @@ import {
     HowItWorks,
     Contacts,
     Dashboard, 
-    SignIn, 
-    SignUp,
-    SignOut,
+    // SignIn, 
+    // SignUp,
+    // SignOut,
     UserAccount, 
     Assets,
     Trackings,
@@ -20,8 +20,8 @@ export default function() {
             <Route path="/" element={<Home />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/contacts" element={<Contacts />} />
-            <Route path="/user/sign-in" element={<SignIn />} />
-            <Route path="/user/sign-up" element={<SignUp />} />
+            {/* <Route path="/user/sign-in" element={<SignIn />} />
+            <Route path="/user/sign-up" element={<SignUp />} /> */}
             <Route
                 path="/dashboard/dashboard"
                 element={
@@ -30,14 +30,14 @@ export default function() {
                     </PrivateRoute>
                 }
             />
-            <Route
+            {/* <Route
                 path="/user/sign-out"
                 element={
                     <PrivateRoute>
                         <SignOut />
                     </PrivateRoute>
                 }
-            />
+            /> */}
             <Route
                 path="/dashboard/account"
                 element={
