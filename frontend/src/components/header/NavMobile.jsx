@@ -11,7 +11,7 @@ export default function({ isAuth, logout }) {
                 <a href="/how-it-works" className="hover:text-emerald-600 transition">How it works</a>
                 <a href="/contacts" className="hover:text-emerald-600 transition">Conacts</a>
                 {!isAuth ? (
-                    <LinkBtn title="Sign in" icon="LogIn" url="/user/sign-in" />
+                    <LinkBtn title="Login" icon="LogIn" url="/login" />
                 ) : (
                     <button
                         className="flex justify-center align-center px-4 py-1.5 bg-white text-sm text-red-400 border border-red-300 rounded-lg hover:bg-red-500 hover:text-white transition"

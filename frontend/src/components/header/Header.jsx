@@ -17,7 +17,7 @@ function Header() {
                 <NavTop user={ user } />
                 <div className="flex items-center space-x-2">
                     {!user ? (
-                        <LinkBtn title="Sign in" icon="LogIn" url="/user/sign-in" hidden={ true } />
+                        <LinkBtn title="Sign in" icon="LogIn" url="/login" hidden={ true } />
                     ) : (
                         <button
                             onClick={logout}

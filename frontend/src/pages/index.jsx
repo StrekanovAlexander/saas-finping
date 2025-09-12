@@ -7,6 +7,7 @@ import Dashboard from "./dashboard/Dashboard.jsx";
 import Trackings from "./dashboard/Trackings.jsx";
 import UserAccount from "./dashboard/UserAccount.jsx";
 import Settings from "./dashboard/Settings.jsx";
+import Login from "./auth/Login.jsx";
 
 // import SignIn from "./user/SignIn.jsx";
 // import SignUp from "./user/SignUp.jsx";
@@ -17,6 +18,7 @@ export {
     HowItWorks, 
     Contacts, 
     Dashboard,
+    Login,
     // SignIn,
     // SignUp,
     // SignOut,

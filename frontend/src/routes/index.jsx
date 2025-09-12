@@ -5,6 +5,7 @@ import {
     HowItWorks,
     Contacts,
     Dashboard, 
+    Login,
     // SignIn, 
     // SignUp,
     // SignOut,
@@ -20,6 +21,7 @@ export default function() {
             <Route path="/" element={<Home />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/contacts" element={<Contacts />} />
+            <Route path="/login" element={<Login />} />
             {/* <Route path="/user/sign-in" element={<SignIn />} /> */}
             {/* <Route path="/user/sign-up" element={<SignUp />} /> */}
             <Route
