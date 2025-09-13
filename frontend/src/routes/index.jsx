@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute.jsx"; 
+import AdminRoute from "./AdminRoute.jsx"; 
 import { 
     Home, 
     HowItWorks,
@@ -11,7 +12,8 @@ import {
     UserAccount, 
     Assets,
     Trackings,
-    Settings
+    Settings,
+    Users
 } from "../pages/index.jsx";
 
 export default function() {
@@ -65,10 +67,18 @@ export default function() {
             <Route
                 path="/dashboard/settings"
                 element={
-                    <PrivateRoute>
+                    <AdminRoute>
                         <Settings />
-                    </PrivateRoute>
+                    </AdminRoute>
                 }
+            />
+            <Route 
+                path="/dashboard/users" 
+                element={
+                    <AdminRoute>
+                        <Users />
+                    </AdminRoute>
+                } 
             />
         </Routes>
     );
