@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
-import Button from "./elements/Button.jsx";
-import Checkbox from "./elements/Checkbox.jsx";
 import { CheckCircle, XCircle } from "lucide-react";
+import toast, { Toaster } from "react-hot-toast";
+import Button from "../../components/buttons/Button.jsx";
+import Checkbox from "../../components/checkboxes/Checkbox.jsx";
 
-function FormSignUp() {
-    
+function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [subscribe, setSubscribe] = useState(false);
@@ -186,7 +185,7 @@ function FormSignUp() {
                         />
                         <Button title="Create an account" icon="UserPlus" />
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Already have an account? <Link to="/user/sign-in" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
+                            Already have an account? <Link to="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
                         </p>                        
                     </form>
                     <Toaster position="top-right" />
@@ -205,6 +204,7 @@ function FormSignUp() {
         )}
         </div>
     )
+
 }
 
-export default FormSignUp;
+export default Register;

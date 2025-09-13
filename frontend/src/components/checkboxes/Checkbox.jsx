@@ -3,7 +3,7 @@ export default function({ name, title, checked, onChange }) {
         <div className="flex items-start">
             <div className="flex items-center h-5">
                 <input 
-                    className="w-4 h-4 text-indigo-600 accent-indigo-600 border-gray-200 rounded focus:ring-indigo-500"
+                    className="w-4 h-4 text-emerald-600 accent-emerald-600 border-gray-200 rounded focus:ring-emerald-500"
                     type="checkbox"
                     name={ name }
                     id={ name }

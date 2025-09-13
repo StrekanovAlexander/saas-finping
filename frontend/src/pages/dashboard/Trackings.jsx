@@ -60,7 +60,7 @@ function Trackings() {
                     </button>
                 </div>
 
-                <table className="w-full border rounded-lg">
+                <table className="min-w-full bg-white border border-gray-200">
                     <thead className="bg-gray-100">
                         <tr>
                             <th className="px-4 py-2 text-left">Asset</th>

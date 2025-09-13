@@ -7,9 +7,7 @@ import {
     Dashboard, 
     Login,
     Logout,
-    // SignIn, 
-    // SignUp,
-    // SignOut,
+    Register,
     UserAccount, 
     Assets,
     Trackings,
@@ -23,8 +21,7 @@ export default function() {
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/login" element={<Login />} />
-            {/* <Route path="/user/sign-in" element={<SignIn />} /> */}
-            {/* <Route path="/user/sign-up" element={<SignUp />} /> */}
+            <Route path="/register" element={<Register />} />
             <Route
                 path="/dashboard/dashboard"
                 element={
