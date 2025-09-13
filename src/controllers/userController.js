@@ -124,8 +124,8 @@ export async function activateUser (req, res) {
         user.active = true;
         user.activationToken = null;
         await user.save();
-
-        res.status(200).json({ message: "Account activated successfully" });
+        // res.status(200).json({ message: "Account activated successfully" });
+        return res.redirect("https://www.finping.space/login");
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Server error" });
