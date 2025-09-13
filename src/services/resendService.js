@@ -5,7 +5,7 @@ dotenv.config();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendActivationToken(email, token) {
-    const activationLink = `https://www.finping.space/api/users/activate/${token}`;
+    const activationLink = `https://app.finping.space/api/users/activate/${token}`;
     
     try {
         await resend.emails.send({
