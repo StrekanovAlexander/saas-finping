@@ -22,6 +22,7 @@
     "mysql2": "^3.14.5",
     "node-cron": "^4.2.1",
     "nodemailer": "^7.0.6",
+    "resend": "^6.0.3",
     "sequelizer": "^1.1.4"
   }
 }

@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import { User } from '../models/index.js';
-import { sendActivationEmail } from '../services/emailService.js';
+import { sendActivationToken } from '../services/resendService.js';
 
 export async function createUser(req, res) {
     try {
@@ -19,7 +19,7 @@ export async function createUser(req, res) {
 
         const user = await User.create({ email, passwordHash, telegramId, subscribe, activationToken });
 
-        // await sendActivationEmail(user.email, activationToken);
+        await sendActivationToken(user.email, activationToken);
 
         res.status(201).json(user);
     } catch (error) {
