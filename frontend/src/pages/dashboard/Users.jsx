@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Check, X, UserCog, User } from 'lucide-react';
+import { useAuth } from "../../context/AuthContext.jsx";
 import { PageTitle, Sidebar } from "./components/index.jsx";
 import { formatDate } from "../../utils/formats.jsx";
 
-
 function Users() {
+    const { token } = useAuth();
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
@@ -12,7 +13,16 @@ function Users() {
     useEffect(() => {
         async function fetchUsers() {
             try {
-                const res = await fetch(`${import.meta.env.VITE_API_URL}/users`);
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!res.ok) {
+                    throw new Error(`Error ${res.status}`);
+                }
+
                 const data = await res.json();
                 setUsers(data);
             } catch (err) {

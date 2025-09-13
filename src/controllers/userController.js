@@ -29,7 +29,13 @@ export async function createUser(req, res) {
 
 export async function getUsers(req, res) {
     try {
-        const users = await User.findAll();
+        if (req.user.role !== "admin") {
+           return res.status(403).json({ message: "Access denied" });
+        }
+
+        const users = await User.findAll({
+            attributes: ["id", "email", "telegramId", "active", "subscribe", "role", "createdAt", "updatedAt"] 
+        });
         res.json(users);
     } catch (error) {
         res.status(500).json({ error: error.message });

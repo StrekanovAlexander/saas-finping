@@ -19,7 +19,7 @@ function Sidebar() {
     ];
 
     return (
-        <div className="w-64 bg-white border-r shadow-md p-4">
+        <div className="w-64 bg-white border-r shadow-md p-4 mt-2">
             <h2 className="text-xl font-bold mb-6">Control panel</h2>
             <nav className="space-y-2">
                 {navItems.map((item) => (
