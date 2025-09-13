@@ -6,6 +6,7 @@ import {
     Contacts,
     Dashboard, 
     Login,
+    Logout,
     // SignIn, 
     // SignUp,
     // SignOut,
@@ -32,14 +33,14 @@ export default function() {
                     </PrivateRoute>
                 }
             />
-            {/* <Route
-                path="/user/sign-out"
+            <Route
+                path="/logout"
                 element={
                     <PrivateRoute>
-                        <SignOut />
+                        <Logout />
                     </PrivateRoute>
                 }
-            /> */}
+            />
             <Route
                 path="/dashboard/account"
                 element={

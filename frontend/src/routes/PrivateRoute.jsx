@@ -5,7 +5,7 @@ function PrivateRoute({ children }) {
     const { user, token } = useAuth();
 
     if (!user || !token) {
-        return <Navigate to="/user/sign-in" replace />;
+        return <Navigate to="/login" replace />;
     }
 
     return children;
