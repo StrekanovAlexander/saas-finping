@@ -3,7 +3,7 @@ import express from 'express';
 import sequelize from './src/config/db.js';
 import { assetRoutes, trackingRoutes, userRoutes } from './src/routes/index.js';
 // import './src/cron/checkTrackings.js';
-// import './src/cron/updateAssets.js';
+import './src/cron/updateAssets.js';
 const app = express();
 app.use(cors()); // app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
