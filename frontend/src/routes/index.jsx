@@ -6,6 +6,7 @@ import {
     Home, 
     HowItWorks,
     Contacts,
+    AssetsPage,
     Dashboard, 
     Login,
     Logout,
@@ -22,6 +23,7 @@ export default function() {
         <Routes>
             <Route element={<PublicLayout />}>
                 <Route path="/" element={<Home />} />
+                <Route path="/assets" element={<AssetsPage />} />
                 <Route path="/how-it-works" element={<HowItWorks />} />
                 <Route path="/contacts" element={<Contacts />} />
                 <Route path="/login" element={<Login />} />
