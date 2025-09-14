@@ -22,11 +22,9 @@ function Home() {
               className="px-6 py-3 bg-teal-600 text-white rounded-xl font-semibold shadow hover:bg-teal-700 transition"
               to="/assets"
             >
-              All assets
+              More Data
             </Link>
-           
           </div>
-
         </div>
       </section>
       <section className="bg-gray-50 py-20">

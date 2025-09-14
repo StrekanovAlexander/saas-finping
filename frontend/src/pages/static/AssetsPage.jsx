@@ -39,7 +39,7 @@ export default function AssetsPage() {
         </span>
       </div>
       {/* State */}
-      {loading && <p className="text-gray-500"><Spinner /></p>}
+      {loading && <div><Spinner /></div>}
       {error && <p className="text-red-500">Error: {error}</p>}
 
       {!loading && !error && (

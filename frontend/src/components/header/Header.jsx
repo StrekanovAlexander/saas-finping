@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { LogIn, LogOut, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useAuth } from "../../context/AuthContext.jsx";
 import Logo from './Logo.jsx';
 import NavTop from './NavTop.jsx';
@@ -18,16 +18,17 @@ function Header() {
                 <div className="flex items-center space-x-2">
                     {!user ? (
                         <Link 
-                            className="hidden md:flex px-1 py-1 bg-white text-sm text-gray-600 border border-gray-600 border rounded-lg hover:bg-gray-600 hover:text-white transition"
-                            to="/login">
-                            <LogIn className="w-4 h-4" />
-                        </Link>
-                    ) : (
+                            className="px-6 py-2 bg-gray-200 text-sm text-gray-700 rounded-lg shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
+                            to="/login"
+                        >
+                            Login
+                        </Link>    
+                        ) : (
                         <button
                             onClick={logout}
-                            className="hidden md:flex px-1 py-1 bg-white text-sm text-gray-600 border border-gray-600 border rounded-lg hover:bg-gray-600 hover:text-white transition"
+                            className="px-6 py-2 bg-gray-200 text-sm text-gray-700 rounded-lg shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
                         >
-                            <LogOut className="w-4 h-4" />
+                            Logout
                         </button>
                     )}
                     {/* Mobile menu button */}

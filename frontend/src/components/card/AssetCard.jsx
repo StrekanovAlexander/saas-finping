@@ -1,5 +1,5 @@
 import { ArrowUpRight, ArrowDownRight } from "lucide-react";
-import { formatNumber } from "../../utils/formats.jsx";
+import { formatNumber, formatDate } from "../../utils/formats.jsx";
 
 function AssetCard({ title, data }) {
   return (
@@ -31,7 +31,6 @@ function AssetCard({ title, data }) {
               const isUp = item.price > item.previousPrice;
               const change = item.price - item.previousPrice;
               const percent = ((change / item.previousPrice) * 100).toFixed(2);
-
               return (
                 <tr key={item.name} className="border-t">
                   <td className="px-4 py-2 font-medium">{item.symbol}</td>
@@ -54,7 +53,7 @@ function AssetCard({ title, data }) {
           </tbody>
         </table>
       </div>
-      <p className="text-sm text-gray-500 mt-1">Last updated: 5s ago</p>      
+      <p className="text-sm text-gray-500 mt-3">Last updated: { formatDate(data[0].lastUpdated) }</p>      
     </div>
   );
 }
