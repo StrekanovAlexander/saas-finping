@@ -9,16 +9,13 @@ function UserAccount() {
     }
 
     return (
-        <div className="flex min-h-screen bg-gray-50">
-            <Sidebar />
-            <div className="flex-1 p-6">
-                <PageTitle title="Account"/>
-                <div className="bg-white p-6 rounded-lg shadow">
-                    <p><strong>ID:</strong> {user.id}</p>
-                    <p><strong>Email:</strong> {user.email}</p>
-                </div>
+        <>
+            <PageTitle title="Account"/>
+            <div className="bg-white p-6 rounded-lg shadow">
+                <p><strong>ID:</strong> {user.id}</p>
+                <p><strong>Email:</strong> {user.email}</p>
             </div>
-        </div>  
+        </>  
     );
 }
 

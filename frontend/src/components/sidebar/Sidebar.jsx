@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Home, User, BarChart2, Settings, Layers, Users  } from "lucide-react";
-import { useAuth } from "../../../context/AuthContext.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 function Sidebar() {
     const location = useLocation();
@@ -19,8 +19,7 @@ function Sidebar() {
     ];
 
     return (
-        <div className="w-64 bg-white border-r shadow-md p-4 mt-2">
-            <h2 className="text-xl font-bold mb-6">Control panel</h2>
+        <div className="w-64 bg-zinc-50 border rounded-lg p-4">
             <nav className="space-y-2">
                 {navItems.map((item) => (
                     <Link

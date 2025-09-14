@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { PageTitle, Sidebar } from "./components/index.jsx";
+import { Th, ThSort, Td } from "../../components/table/index.jsx";
+import { PageTitle } from "./components/index.jsx";
 
 const formatNumber = (value) => {
     if (value === null || value === undefined) return "-";
@@ -61,77 +62,37 @@ function Assets() {
     if (loading) return <p className="text-center py-10">Loading assets...</p>;
 
     return (
-        <div className="flex min-h-screen bg-gray-50">
-            <Sidebar />
-            <div className="flex-1 p-6">
-                <PageTitle title="Assets"/>
-                <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white border border-gray-200">
-                        <thead className="bg-gray-50">
-                            <tr className="text-left">
-                                <th
-                                    className="px-4 py-2 cursor-pointer"
-                                    onClick={() => requestSort("name")}
-                                >
-                                    Name {getSortIndicator("name")}
-                                </th>
-                                <th
-                                    className="px-4 py-2 cursor-pointer"
-                                    onClick={() => requestSort("symbol")}
-                                >
-                                    Symbol {getSortIndicator("symbol")}
-                                </th>
-                                <th
-                                    className="px-4 py-2 cursor-pointer"
-                                    onClick={() => requestSort("type")}
-                                >
-                                    Type {getSortIndicator("type")}
-                                </th>
-                                <th
-                                    className="px-4 py-2 cursor-pointer"
-                                    onClick={() => requestSort("dataSource")}
-                                >
-                                    Data Source {getSortIndicator("dataSource")}
-                                </th>
-                                <th
-                                    className="px-4 py-2 cursor-pointer"
-                                    onClick={() => requestSort("price")}
-                                >
-                                    Price {getSortIndicator("price")}
-                                </th>
-                                <th
-                                    className="px-4 py-2 cursor-pointer"
-                                    onClick={() => requestSort("previousPrice")}
-                                >
-                                    Previous Price {getSortIndicator("previousPrice")}
-                                </th>
-                                <th
-                                    className="px-4 py-2 cursor-pointer"
-                                    onClick={() => requestSort("lastUpdated")}
-                                >
-                                    Last Updated {getSortIndicator("lastUpdated")}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {sortedAssets.map((asset) => (
-                                <tr key={asset.id} className="border-t hover:bg-gray-50">
-                                    <td className="px-4 py-2">{ asset.name }</td>
-                                    <td className="px-4 py-2">{ asset.symbol }</td>
-                                    <td className="px-4 py-2">{ asset.type }</td>
-                                    <td className="px-4 py-2">{ asset.dataSource }</td>
-                                    <td className="px-4 py-2">{ formatNumber(asset.price) }</td>
-                                    <td className="px-4 py-2">{ formatNumber(asset.previousPrice) }</td>
-                                    <td className="px-4 py-2">
-                                        {asset.lastUpdated ? new Date(asset.lastUpdated).toLocaleString() : "-"}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+        <>
+            <PageTitle title="Assets"/>
+            <div class="border border-gray-200 rounded-lg overflow-hidden dark:border-neutral-700">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700 bg-white">
+                    <thead>
+                        <tr>
+                            <ThSort title="Name" field="name" fn={ requestSort } sortConfig={ sortConfig } />
+                            <ThSort title="Symbol" field="symbol" fn={ requestSort } sortConfig={ sortConfig } />
+                            <ThSort title="Type" field="type" fn={ requestSort } sortConfig={ sortConfig } />
+                            <ThSort title="Data source" field="dataSource" fn={ requestSort } sortConfig={ sortConfig } />
+                            <ThSort title="Price" field="price" fn={ requestSort } sortConfig={ sortConfig } />
+                            <ThSort title="Previous Price" field="previousPrice" fn={ requestSort } sortConfig={ sortConfig } />
+                            <ThSort title="Last Updated" field="lastUpdated" fn={ requestSort } sortConfig={ sortConfig } />
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                    { sortedAssets.map((asset) => (
+                        <tr key={ asset.id } className="odd:bg-white even:bg-gray-100 dark:odd:bg-neutral-900 dark:even:bg-neutral-800">
+                            <Td title={ asset.name } weight="bold" />
+                            <Td title={ asset.symbol } weight="bold" />
+                            <Td title={ asset.type } />
+                            <Td title={ asset.dataSource } />
+                            <Td title={ asset.price } />
+                            <Td title={ asset.previousPrice } />
+                            <Td title={ asset.lastUpdated ? new Date(asset.lastUpdated).toLocaleString() : "-" } />
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
             </div>
-        </div>  
+       </>  
     );
 }
 

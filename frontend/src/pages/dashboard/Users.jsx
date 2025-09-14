@@ -66,9 +66,7 @@ function Users() {
     if (loading) return <p className="text-center py-10">Loading users...</p>;
     
     return (
-        <div className="flex min-h-screen bg-gray-50">
-            <Sidebar />
-            <div className="flex-1 p-6">
+            <>
                 <PageTitle title="Users"/>
                     <div className="overflow-x-auto">
                         <table className="min-w-full bg-white border border-gray-200">
@@ -141,8 +139,7 @@ function Users() {
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>  
+            </>
     );
 }
 
