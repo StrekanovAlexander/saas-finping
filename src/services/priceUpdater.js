@@ -56,3 +56,13 @@ export async function updateAssetPrices() {
         console.error('❌ Error updating asset prices:', err.message);
     }
 }
+
+export async function runUpdateAssetPrices() {
+  try {
+    console.log('Running asset prices update at', new Date().toISOString());
+    await updateAssetPrices();
+    console.log('Asset prices updated successfully');
+  } catch (err) {
+    console.error('Error updating asset prices:', err);
+  }
+}
