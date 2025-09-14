@@ -11,8 +11,8 @@ function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <header className="w-full bg-white shadow-sm sticky top-0 z-50">
-            <div className="w-full max-w-6xl mx-auto flex items-center justify-between py-3">
+        <header className="w-full bg-white shadow-sm sticky top-0 z-50 px-6">
+            <div className="w-full mx-auto flex items-center justify-between py-3">
                 <a href="/"><Logo /></a>
                 <NavTop user={ user } />
                 <div className="flex items-center space-x-2">

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   return (
+  <> 
     <div className="flex flex-col items-center">
       <section className="bg-white py-16 shadow-sm max-w-6xl">
         <div className="max-w-6xl mx-auto px-6 text-center">
@@ -56,7 +57,8 @@ function Home() {
         </div>
       </section>
     </div>
-    );
+  </>  
+  );
 }
 
 export default Home;

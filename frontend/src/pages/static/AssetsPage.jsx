@@ -26,10 +26,10 @@ export default function AssetsPage() {
   }, []);
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-12">
+    <section className="max-w-6xl mx-auto py-12">
       {/* Header */}
       <div className="flex items-center gap-2 mb-6">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Assets</h1>
+        <h1 className="text-3xl md:text-3xl font-bold text-gray-900">Assets</h1>
         <span className="flex h-3 w-3 relative">
           <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-teal-500 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-600"></span>
