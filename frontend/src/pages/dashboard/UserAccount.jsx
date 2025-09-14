@@ -1,5 +1,5 @@
 import { useAuth } from "../../context/AuthContext.jsx";
-import { PageTitle, Sidebar } from "./components/index.jsx";
+import { PageTitle } from "./components/index.jsx";
 
 function UserAccount() {
     const { user } = useAuth();

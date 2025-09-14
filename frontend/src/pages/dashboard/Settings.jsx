@@ -1,4 +1,4 @@
-import { PageTitle, Sidebar } from "./components/index.jsx";
+import { PageTitle } from "./components/index.jsx";
 
 function Settings() {
     return (
