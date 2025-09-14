@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Check, X, UserCog, User } from 'lucide-react';
 import { useAuth } from "../../context/AuthContext.jsx";
-import { PageTitle } from "./components/index.jsx";
+import PageTitle from "../../components/title/PageTitle.jsx";
 import { formatDate } from "../../utils/formats.jsx";
 
 function Users() {

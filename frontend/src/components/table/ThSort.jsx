@@ -10,7 +10,7 @@ export default function({ title, field, fn, sortConfig }) {
     return(
         <th 
             scope="col" 
-            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500 cursor-pointer"
+            className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500 cursor-pointer"
             onClick={ () => fn(field) }
         >
             { title } { getSortIndicator(field) }

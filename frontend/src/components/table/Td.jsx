@@ -4,7 +4,7 @@ export default function({ title, weight }) {
         classOptions += " font-medium";
     }  
     return (
-        <td class={ classOptions }>
+        <td className={ classOptions }>
             { title }
         </td>
     );

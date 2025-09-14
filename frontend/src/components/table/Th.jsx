@@ -1,6 +1,6 @@
 export default function({ title }) {
     return(
-        <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+        <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
             { title }
         </th>
     );

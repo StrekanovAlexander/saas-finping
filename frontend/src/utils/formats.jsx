@@ -1,4 +1,11 @@
 export function formatDate(date) {
-    const parts = date.split('T');
-    return `${ parts[0] } ${ parts[1].split('.')[0] }`;
+    return date ? new Date(date).toLocaleString() : "-";
 }
+
+export function formatNumber(value) {
+    if (value === null || value === undefined) return "-";
+    return new Intl.NumberFormat("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 8,
+    }).format(value);
+};
