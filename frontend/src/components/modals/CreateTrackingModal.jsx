@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { CircleX, Save } from "lucide-react";
 import toast from "react-hot-toast";
-import { useAuth } from "../../../context/AuthContext.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 function CreateTrackingModal({ onClose, onCreate }) {
   const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
   const [assets, setAssets] = useState([]);
   const [assetId, setAssetId] = useState("");
   const [threshold, setThreshold] = useState("");
   const [direction, setDirection] = useState("above");
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchAssets() {

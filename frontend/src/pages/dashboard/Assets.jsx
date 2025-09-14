@@ -57,21 +57,21 @@ function Assets() {
                         <ThSort title="Symbol" field="symbol" fn={ requestSort } sortConfig={ sortConfig } />
                         <ThSort title="Type" field="type" fn={ requestSort } sortConfig={ sortConfig } />
                         <ThSort title="Data source" field="dataSource" fn={ requestSort } sortConfig={ sortConfig } />
-                        <ThSort title="Price" field="price" fn={ requestSort } sortConfig={ sortConfig } />
-                        <ThSort title="Previous Price" field="previousPrice" fn={ requestSort } sortConfig={ sortConfig } />
+                        <ThSort title="Price" field="price" fn={ requestSort } sortConfig={ sortConfig } textAlign="right" />
+                        <ThSort title="Previous Price" field="previousPrice" fn={ requestSort } sortConfig={ sortConfig } textAlign="right" />
                         <ThSort title="Last Updated" field="lastUpdated" fn={ requestSort } sortConfig={ sortConfig } />
                     </Tr>
                 </Thead>
                 <Tbody>
                     { sortedAssets.map((asset) => (
                         <Tr key={ asset.id } zebra={ true }>
-                            <Td title={ asset.name } weight="bold" />
-                            <Td title={ asset.symbol } weight="bold" />
-                            <Td title={ asset.type } />
-                            <Td title={ asset.dataSource } />
-                            <Td title={ formatNumber(asset.price) } />
-                            <Td title={ formatNumber(asset.previousPrice) } />
-                            <Td title={ formatDate(asset.lastUpdated) } />
+                            <Td weight="bold">{ asset.name }</Td>
+                            <Td weight="bold">{ asset.symbol }</Td>
+                            <Td>{ asset.type }</Td>
+                            <Td>{ asset.dataSource }</Td>
+                            <Td weight="bold" textAlign="right">{ formatNumber(asset.price) }</Td>
+                            <Td weight="bold" textAlign="right">{ formatNumber(asset.previousPrice) }</Td>
+                            <Td>{ formatDate(asset.lastUpdated) }</Td>
                         </Tr>
                     ))}
                 </Tbody>

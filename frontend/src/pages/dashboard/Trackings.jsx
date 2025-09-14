@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
-import { CirclePlus, CheckCircle, XCircle } from 'lucide-react';
+import { CirclePlus, Check } from 'lucide-react';
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { Table, Thead, Tbody, Tr, ThSort, Td } from "../../components/table/index.jsx";
 import PageTitle from "../../components/title/PageTitle.jsx";
-import { CreateTrackingModal } from "./components/index.jsx";
-
-const formatNumber = (value) => {
-    if (value === null || value === undefined) return "-";
-    return new Intl.NumberFormat("en-US", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 8,
-    }).format(value);
-};
+import { CreateTrackingModal } from "../../components/modals/index.jsx";
+import { formatDate, formatNumber } from "../../utils/formats.jsx";
 
 function Trackings() {
     const { user, token } = useAuth();
     const [trackings, setTrackings] = useState([]);
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
     const [showModal, setShowModal] = useState(false);
 
     async function fetchTrackings() {
@@ -41,6 +36,27 @@ function Trackings() {
         }
     }, [user?.id]);
 
+    const sortedTrackings = [...trackings].sort((a, b) => {
+        if (!sortConfig.key) return 0;
+        let aValue = a[sortConfig.key];
+        let bValue = b[sortConfig.key];
+
+        if (typeof aValue === "string") aValue = aValue.toLowerCase();
+        if (typeof bValue === "string") bValue = bValue.toLowerCase();
+
+        if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
+        if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
+        return 0;
+    });
+
+    const requestSort = (key) => {
+        let direction = "asc";
+        if (sortConfig.key === key && sortConfig.direction === "asc") {
+            direction = "desc";
+        }
+        setSortConfig({ key, direction });
+    };
+
     async function handleCreate() {
         toast.success("Tracking added!");
         setShowModal(false);
@@ -49,7 +65,7 @@ function Trackings() {
 
     return (
         <>
-            <div class="flex justify-between items-center">
+            <div className="flex justify-between items-center">
                 <PageTitle title="Trackings" />
                 <button
                     onClick={() => setShowModal(true)}
@@ -59,50 +75,40 @@ function Trackings() {
                 </button>
             </div>
 
-            <table className="min-w-full bg-white border border-gray-200">
-                <thead className="bg-gray-100">
-                    <tr>
-                        <th className="px-4 py-2 text-left">Asset</th>
-                        <th className="px-4 py-2 text-left">Threshold</th>
-                        <th className="px-4 py-2 text-left">Direction</th>
-                        <th className="px-4 py-2 text-left">Channel</th>
-                        <th className="px-4 py-2 text-left">Active</th>
-                        <th className="px-4 py-2 text-left">Sent</th>
-                        <th className="px-4 py-2 text-left">Max</th>
-                        <th className="px-4 py-2 text-left">Last Notified</th>
-                        <th className="px-4 py-2 text-left">Interval (min)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {trackings.map((t) => (
-                    <tr key={t.id} className="border-t hover:bg-gray-50">
-                        <td className="px-4 py-2">{t.Asset?.name} ({t.Asset?.symbol})</td>
-                        <td className="px-4 py-2">{formatNumber(t.threshold)}</td>
-                        <td className="px-4 py-2">{t.direction}</td>
-                        <td className="px-4 py-2">{t.channel}</td>
-                        <td className="px-4 py-2">
-                            { t.active 
-                                ? <CheckCircle className="text-green-500 ml-2 w-5 h-5" /> 
-                                : <XCircle className="text-red-500 ml-2 w-5 h-5" />
-                            }
-                        </td>
-                        <td className="px-4 py-2">{t.notificationsSent}</td>
-                        <td className="px-4 py-2">{t.maxNotifications}</td>
-                        <td className="px-4 py-2">
-                            {t.lastNotifiedAt
-                            ? new Date(t.lastNotifiedAt).toLocaleString()
-                            : "-"}
-                        </td>
-                        <td className="px-4 py-2">{t.notificationIntervalMinutes}</td>
-                    </tr>
+            <Table>
+                <Thead>
+                    <Tr>
+                        <ThSort title="Asset" field="asset" fn={ requestSort } sortConfig={ sortConfig } />
+                        <ThSort title="Threshold" field="threshold" fn={ requestSort } sortConfig={ sortConfig } textAlign="right" />
+                        <ThSort title="Direction" field="direction" fn={ requestSort } sortConfig={ sortConfig } />
+                        <ThSort title="Active" field="active" fn={ requestSort } sortConfig={ sortConfig } textAlign="center" />
+                        <ThSort title="Sent" field="notificationsSent" fn={ requestSort } sortConfig={ sortConfig } textAlign="center" />
+                        <ThSort title="Max notifications" field="maxNotifications" fn={ requestSort } sortConfig={ sortConfig } textAlign="center" />
+                        <ThSort title="Last Notified" field="lastNotifiedAt" fn={ requestSort } sortConfig={ sortConfig } />
+                        <ThSort title="Interval (min)" field="notificationIntervalMinutes" fn={ requestSort } sortConfig={ sortConfig } textAlign="center" />
+                        <ThSort title="Created at" field="createdAt" fn={ requestSort } sortConfig={ sortConfig } />
+                    </Tr>
+                </Thead>
+                <Tbody>
+                    {sortedTrackings.map((t) => (
+                        <Tr key={t.id} zebra={ true }>
+                            <Td weight="bold">{t.Asset?.name} ({t.Asset?.symbol})</Td>
+                            <Td weight="bold" textAlign="right">{formatNumber(t.threshold)}</Td>
+                            <Td>{t.direction}</Td>
+                            <Td textAlign="center"> 
+                                <input type="radio" checked={t.active} readOnly className="accent-teal-600" />
+                            </Td>
+                            <Td textAlign="center">{t.notificationsSent}</Td>
+                            <Td textAlign="center">{t.maxNotifications}</Td>
+                            <Td>{formatDate(t.lastNotifiedAt)}</Td>
+                            <Td textAlign="center">{t.notificationIntervalMinutes}</Td>
+                            <Td>{formatDate(t.createdAt)}</Td>
+                        </Tr>
                     ))}
-                </tbody>
-            </table>
+                </Tbody>    
+            </Table>
             {showModal && (
-                <CreateTrackingModal
-                    onClose={() => setShowModal(false)}
-                    onCreate={handleCreate}
-                />
+                <CreateTrackingModal onClose={() => setShowModal(false)} onCreate={handleCreate} />
             )}
         </>
     );

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Check, X, UserCog, User } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { useAuth } from "../../context/AuthContext.jsx";
 import PageTitle from "../../components/title/PageTitle.jsx";
+import { Table, Thead, Tbody, Tr, ThSort, Th, Td } from "../../components/table/index.jsx";
 import { formatDate } from "../../utils/formats.jsx";
 
 function Users() {
@@ -56,90 +57,46 @@ function Users() {
         setSortConfig({ key, direction });
     };
     
-    const getSortIndicator = (key) => {
-        if (sortConfig.key === key) {
-            return sortConfig.direction === "asc" ? "▲" : "▼";
-        }
-        return "";
-    };
-    
     if (loading) return <p className="text-center py-10">Loading users...</p>;
     
     return (
-            <>
-                <PageTitle title="Users"/>
-                    <div className="overflow-x-auto">
-                        <table className="min-w-full bg-white border border-gray-200">
-                            <thead className="bg-gray-50">
-                                <tr className="text-left text-sm">
-                                    <th
-                                        className="px-4 py-2 cursor-pointer"
-                                        onClick={() => requestSort("email")}
-                                    >
-                                        Email {getSortIndicator("email")}
-                                    </th>
-                                    <th
-                                        className="px-4 py-2 cursor-pointer"
-                                        onClick={() => requestSort("role")}
-                                    >
-                                        Role {getSortIndicator("role")}
-                                    </th>
-                                    <th
-                                        className="px-4 py-2 cursor-pointer"
-                                        onClick={() => requestSort("active")}
-                                    >
-                                        Activity {getSortIndicator("active")}
-                                    </th>
-                                    <th
-                                        className="px-4 py-2 cursor-pointer"
-                                        onClick={() => requestSort("subscribe")}
-                                    >
-                                        Subscribed {getSortIndicator("subscribe")}
-                                    </th>
-                                    <th
-                                        className="px-4 py-2 cursor-pointer"
-                                        onClick={() => requestSort("createdAt")}
-                                    >
-                                        Created at {getSortIndicator("createdAt")}
-                                    </th>
-                                    <th
-                                        className="px-4 py-2 cursor-pointer"
-                                        onClick={() => requestSort("updatedAt")}
-                                    >
-                                        Updated at {getSortIndicator("updatedAt")}
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {sortedUsers.map((el) => (
-                                <tr key={el.id} className="border-t hover:bg-gray-50 text-sm">
-                                    <td className="px-4 py-2">{ el.email }</td>
-                                    <td className="px-4 py-2">
-                                        { el.role === 'admin'
-                                            ? <UserCog className="text-gray-700 w-5 h-5" />
-                                            : <User className="text-gray-500 w-5 h-5" />
-                                        }
-                                    </td>
-                                    <td className="px-4 py-2 flex items-center">
-                                        { el.active 
-                                            ? <Check className="text-green-500 w-5 h-5" /> 
-                                            : <X className="text-gray-500 w-5 h-5" />
-                                        }
-                                    </td>
-                                    <td className="px-4 py-2">
-                                        { el.subscribe
-                                            ? <Check className="text-green-500 w-5 h-5" /> 
-                                            : <X className="text-gray-500 w-5 h-5" /> 
-                                        }
-                                    </td> 
-                                    <td className="px-4 py-2">{ formatDate(el.createdAt) }</td>
-                                    <td className="px-4 py-2">{ formatDate(el.updatedAt) }</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </>
+        <>
+            <PageTitle title="Users"/>
+            <Table>
+                <Thead>
+                    <Tr>
+                        <ThSort title="Email" field="email" fn={ requestSort } sortConfig={ sortConfig } />
+                        <ThSort title="Is Admin" field="role" fn={ requestSort } sortConfig={ sortConfig } textAlign="center" />
+                        <ThSort title="Subscribe" field="subscribe" fn={ requestSort } sortConfig={ sortConfig } textAlign="center" />
+                        <ThSort title="Active" field="active" fn={ requestSort } sortConfig={ sortConfig } textAlign="center" />
+                        <ThSort title="Created at" field="createdAt" fn={ requestSort } sortConfig={ sortConfig } />
+                        <Th title="Action" textAlign="center" />
+                    </Tr>
+                </Thead>
+                <Tbody>
+                    { sortedUsers.map((el) => (
+                        <Tr key={ el.id } zebra={ true }>
+                            <Td weight="bold">{ el.email }</Td>
+                            <Td textAlign="center">
+                                <input type="radio" checked={el.role === "admin"} readOnly className="accent-teal-600" />
+                            </Td>
+                            <Td textAlign="center">
+                                <input type="radio" checked={el.subscribe} readOnly className="accent-teal-600" />
+                            </Td>
+                            <Td textAlign="center"> 
+                                <input type="radio" checked={el.active} readOnly className="accent-teal-600" />
+                            </Td>
+                            <Td>{ formatDate(el.createdAt) }</Td>
+                            <Td textAlign="center">
+                                <button type="button" class="px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-yellow-500 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+                                    Delete
+                                </button>
+                            </Td>
+                        </Tr>
+                    ))}
+                </Tbody>
+            </Table>
+        </>
     );
 }
 
