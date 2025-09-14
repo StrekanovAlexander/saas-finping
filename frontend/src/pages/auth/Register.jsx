@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CheckCircle, XCircle } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
-import Button from "../../components/buttons/Button.jsx";
 import Checkbox from "../../components/checkboxes/Checkbox.jsx";
 
 function Register() {
@@ -119,7 +118,7 @@ function Register() {
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                             <div className="flex items-center">
                                 <input
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                                     type="email" 
                                     name="email" 
                                     id="email" 
@@ -137,7 +136,7 @@ function Register() {
                             <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
                             <div className="flex items-center">
                                 <input
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                                     type="password" 
                                     name="password" 
                                     id="password" 
@@ -160,7 +159,7 @@ function Register() {
                             <label htmlFor="confirmPassword" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
                             <div className="flex items-center">
                                 <input
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                                     type="password" 
                                     name="confirmPassword" 
                                     id="confirmPassword" 
@@ -177,16 +176,30 @@ function Register() {
                                 <p className="text-red-500 text-sm mt-1">Passwords do not match</p>
                             )}
                         </div>
-                        <Checkbox 
+                        {/* <Checkbox 
                             name="subScribe" 
                             title="I want to receive news by email" 
                             checked={ subscribe }
                             onChange={ changeSubscribe }
-                        />
-                        <Button title="Create an account" icon="UserPlus" />
-                        <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Already have an account? <Link to="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
-                        </p>                        
+                        /> */}
+
+                        <div className="flex items-center justify-between">
+                            <button 
+                                type="submit" 
+                                className="flex justify-center text-white bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800 transition"
+                            >
+                                Next
+                            </button>
+                            <p className="text-sm text-gray-500">
+                                Already have an account? 
+                                <Link 
+                                    to="/login" 
+                                    className="font-medium text-teal-600 hover:text-teal-700 ml-1"
+                                >
+                                    Login here
+                                </Link>
+                            </p> 
+                        </div>
                     </form>
                     <Toaster position="top-right" />
                 </div>
