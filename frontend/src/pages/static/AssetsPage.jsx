@@ -124,7 +124,7 @@ export default function AssetsPage() {
                   const isUp = asset.price > asset.previousPrice;
                   const isDown = asset.price < asset.previousPrice;
                   const change = asset.price - asset.previousPrice;
-                  const percent = ((change / asset.previousPrice) * 100).toFixed(2);
+                  const percent =  ((change / asset.previousPrice) * 100).toPrecision(3);
 
                   return (
                     <tr

@@ -26,7 +26,7 @@ function CardAsset({ title, description, data }) {
               const isUp = el.price > el.previousPrice;
               const isDown = el.price < el.previousPrice;
               const change = el.price - el.previousPrice;
-              const percent = ((change / el.previousPrice) * 100).toFixed(2);
+              const percent = ((change / el.previousPrice) * 100).toPrecision(3);
               return (
                 <tr key={el.id} className="hover:bg-gray-50 transition-colors border-t">
                   <td className="px-4 py-3 font-medium text-gray-800 text-start">
