@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
+import FormCreateTracking from "../../components/modals/FormCreateTracking.jsx";
 import Spinner from "../../components/spinner/Spinner.jsx";
 import { formatDate, formatNumber } from "../../utils/formats.jsx";
 
@@ -71,7 +72,6 @@ export default function TrackingsPage() {
             <p className="text-gray-500 mb-6">
                 Your active alerts and tracked assets
             </p>
-
             {/* Filtering */}
             <div className="bg-white rounded-2xl shadow-sm p-4 mb-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -104,39 +104,36 @@ export default function TrackingsPage() {
                     </select>
                 </div>
             </div>
-
             {loading && <div><Spinner /></div>}
             {error && <p className="text-red-500">Error: {error}</p>}
-
             {/* Table */}
             {!loading && !error && (
-            <div className="bg-white rounded-2xl shadow-md p-6">
-                <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-semibold text-gray-800">
-                        Tracked Assets
-                    </h2>
-                    <div className="flex items-center text-sm text-gray-500">
-                        <span className="relative flex h-3 w-3 mr-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
-                        </span>
-                        Updated {minutesAgo === 0 ? "just now" : `${minutesAgo} min ago`}
+                <div className="bg-white rounded-2xl shadow-md p-6">
+                    <div className="flex items-center justify-between mb-4">
+                        <h2 className="text-xl font-semibold text-gray-800">
+                            Tracked Assets
+                        </h2>
+                        <div className="flex items-center text-sm text-gray-500">
+                            <span className="relative flex h-3 w-3 mr-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
+                            </span>
+                            Updated {minutesAgo === 0 ? "just now" : `${minutesAgo} min ago`}
+                        </div>
                     </div>
-                </div>
-
-                <div className="overflow-x-auto">
-                    <table className="w-full border-collapse rounded-xl overflow-hidden">
-                        <thead className="bg-gray-100 text-gray-600 text-sm">
-                            <tr>
-                                <th className="text-left py-3 px-4">Name</th>
-                                <th className="text-left py-3 px-4">Type</th>
-                                <th className="text-left py-3 px-4">Source</th>
-                                <th className="text-right py-3 px-4">Threshold</th>
-                                <th className="text-right py-3 px-4">Direction</th>
-                                <th className="text-right py-3 px-4">Last Updated</th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-sm">
+                    <div className="overflow-x-auto">
+                        <table className="w-full border-collapse rounded-xl overflow-hidden">
+                            <thead className="bg-gray-100 text-gray-600 text-sm">
+                                <tr>
+                                    <th className="text-left py-3 px-4">Name</th>
+                                    <th className="text-left py-3 px-4">Type</th>
+                                    <th className="text-left py-3 px-4">Source</th>
+                                    <th className="text-right py-3 px-4">Threshold</th>
+                                    <th className="text-right py-3 px-4">Direction</th>
+                                    <th className="text-right py-3 px-4">Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody className="text-sm">
                             {filteredTrackings.length > 0 ? (
                                 filteredTrackings.map((t, idx) => (
                                     <tr
@@ -179,23 +176,11 @@ export default function TrackingsPage() {
                 </div>
             </div>
             )}
-            
-            {/* MODAL */}
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative">
-                        <button
-                            onClick={() => setIsModalOpen(false)}
-                            className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
-                        >
-                            ✕
-                        </button>
-                        <h3 className="text-lg font-semibold mb-4">New Tracking</h3>
-                        <div className="text-gray-500 text-sm italic">
-                            (Form will be here soon...)
-                        </div>
-                    </div>
-                </div>
+                <FormCreateTracking 
+                    onClose={() => setIsModalOpen(false)} 
+                    onCreated={() => fetchTrackings()}
+                />
             )}
         </div>
     );
