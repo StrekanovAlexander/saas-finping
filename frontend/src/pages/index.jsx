@@ -8,12 +8,9 @@ import Login from "./auth/Login.jsx";
 import Logout from "./auth/Logout.jsx";
 import Register from "./auth/Register.jsx";
 
-import Assets from "./dashboard/Assets.jsx";
-import Dashboard from "./dashboard/Dashboard.jsx";
 import Trackings from "./manage/Trackings.jsx";
-import UserAccount from "./dashboard/UserAccount.jsx";
-import Settings from "./dashboard/Settings.jsx";
-import Users from "./dashboard/Users.jsx";
+import Account from "./manage/Account.jsx";
+import Users from "./manage/Users.jsx";
 
 export { 
     Home, 
@@ -21,13 +18,10 @@ export {
     Contacts,
     AssetsPage,
     AboutPage, 
-    Dashboard,
     Login,
     Logout,
     Register,
-    UserAccount,
-    Assets,
+    Account,
     Trackings,
-    Settings,
     Users
 };

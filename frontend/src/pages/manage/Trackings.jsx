@@ -4,7 +4,7 @@ import FormCreateTracking from "../../components/modals/FormCreateTracking.jsx";
 import Spinner from "../../components/spinner/Spinner.jsx";
 import { formatDate, formatNumber } from "../../utils/formats.jsx";
 
-export default function TrackingsPage() {
+export default function Trackings() {
     const { user, token } = useAuth();
     const [lastUpdated, setLastUpdated] = useState(new Date());
     const [search, setSearch] = useState("");

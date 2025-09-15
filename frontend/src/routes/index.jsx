@@ -9,14 +9,11 @@ import {
     Contacts,
     AssetsPage,
     AboutPage,
-    Dashboard, 
     Login,
     Logout,
     Register,
-    UserAccount, 
-    Assets,
+    Account, 
     Trackings,
-    Settings,
     Users
 } from "../pages/index.jsx";
 
@@ -36,22 +33,19 @@ export default function() {
             <Route element={<ControlPanelRoute />}>
                 <Route element={<ControlPanelLayout />}>
                     <Route path="/manage/trackings" element={<Trackings />} />
+                    <Route path="/manage/account" element={<Account />} />
                 </Route>
             </Route>
 
             <Route element={<PrivateRoute />}>
                 <Route element={<PrivateLayout />}>
-                    <Route path="/dashboard/dashboard" element={<Dashboard />} />
-                    <Route path="/dashboard/assets" element={<Assets />} />
-                    <Route path="/dashboard/account" element={<UserAccount />} />
                     <Route path="/logout" element={<Logout />} />
                 </Route>
             </Route>
 
             <Route element={<AdminRoute />}>
                 <Route element={<PrivateLayout />}>
-                    <Route path="/dashboard/settings" element={<Settings />} />
-                    <Route path="/dashboard/users" element={<Users />} />
+                    <Route path="/manage/users" element={<Users />} />
                 </Route>
             </Route>
         </Routes>
