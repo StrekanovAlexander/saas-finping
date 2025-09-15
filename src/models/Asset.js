@@ -36,6 +36,11 @@ const Asset = sequelize.define('Asset', {
         type: DataTypes.DATE,
         allowNull: true,
     },
+    prior: {
+        type: DataTypes.ENUM('1', '2', '3'),
+        allowNull: false,
+        defaultValue: '3'
+    },
 }, {
     tableName: 'assets',
 });

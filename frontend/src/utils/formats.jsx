@@ -1,5 +1,5 @@
 export function formatDate(date) {
-    return date ? new Date(date).toLocaleString() : "-";
+    return date ? new Date(date).toLocaleString().replace(',', '') : "-";
 }
 
 export function formatNumber(value) {

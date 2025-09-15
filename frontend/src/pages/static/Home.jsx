@@ -1,6 +1,34 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CardAsset from "../../components/card/CardAsset.jsx";
+import Spinner from "../../components/spinner/Spinner.jsx";
 
 function Home() {
+  const [assets, setAssets] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const url = "https://app.finping.space/api/assets";
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Failed to fetch assets");
+        const data = await res.json();
+        setAssets(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const cryptos = assets.filter(el => el.type === "crypto" && el.prior === '1').slice(0, 3);
+  const commodities = assets.filter(el => el.type === "commodity" && el.prior === '1').slice(0, 3);
+  const fiats = assets.filter(el => el.type === "fiat" && el.prior === '1').slice(0, 3);
+
   return (
     <>
       <div className="flex flex-col items-center">
@@ -16,33 +44,29 @@ function Home() {
               performance, and make informed decisions with our easy-to-use
               platform.
             </p>
+            {/* Loading */}
+            {loading && <div className="mb-10"><Spinner/></div>}
+            {error && <p className="text-red-500">Error: {error}</p>}
             {/* Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-              <div className="bg-white border rounded-2xl shadow p-6 text-center hover:shadow-md transition">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  Cryptocurrencies
-                </h3>
-                <p className="text-gray-500 text-sm">
-                  Track Bitcoin, Ethereum, and more.
-                </p>
+            {!loading && !error && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <CardAsset 
+                  title="Cryptocurrencies" 
+                  description="Track Bitcoin, Ethereum, and more." 
+                  data={cryptos} 
+                />
+                <CardAsset 
+                  title="Commodities" 
+                  description="Stay updated on gold, oil, and natural gas." 
+                  data={commodities} 
+                />
+                <CardAsset 
+                  title="Currencies" 
+                  description="Monitor USD, EUR, JPY, and more."
+                  data={fiats}  
+                />
               </div>
-              <div className="bg-white border rounded-2xl shadow p-6 text-center hover:shadow-md transition">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  Commodities
-                </h3>
-                <p className="text-gray-500 text-sm">
-                  Stay updated on gold, oil, and natural gas.
-                </p>
-              </div>
-              <div className="bg-white border rounded-2xl shadow p-6 text-center hover:shadow-md transition">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  Currencies
-                </h3>
-                <p className="text-gray-500 text-sm">
-                  Monitor USD, EUR, JPY, and more.
-                </p>
-              </div>
-            </div>
+            )}  
             {/* CTA Button */}
             <div className="flex justify-center">
               <Link

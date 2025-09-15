@@ -42,7 +42,7 @@ export default function AssetsPage() {
       asset.symbol.toLowerCase().includes(search.toLowerCase());
 
     const matchesType = filterType ? asset.type === filterType : true;
-    const matchesSource = filterSource ? asset.source === filterSource : true;
+    const matchesSource = filterSource ? asset.dataSource === filterSource : true;
 
     return matchesSearch && matchesType && matchesSource;
   });
