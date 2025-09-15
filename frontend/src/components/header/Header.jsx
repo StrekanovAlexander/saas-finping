@@ -44,12 +44,18 @@ export default function Header() {
                     </Link>
                     { user && 
                         <Link
-                            to="/dashboard/dashboard"
+                            to="/manage/trackings"
                             className="text-gray-600 hover:text-teal-600 transition"
                         >
-                            Dashboard
+                            Trackings
                         </Link> 
                     }
+                    <Link
+                        to="/about"
+                        className="text-orange-600 hover:text-orange-700 transition"
+                    >
+                        About project
+                    </Link>
                 </nav>
                 {!user ? (
                     <Link
@@ -59,12 +65,15 @@ export default function Header() {
                         Log in
                     </Link>
                 ) : (
-                    <button
-                        onClick={logout}
-                        className="hidden md:flex ml-4 px-4 py-2 rounded-lg bg-gray-100 text-sm font-medium text-gray-700 hover:bg-teal-600 hover:text-white transition"
-                    >
-                        Logout
-                    </button>
+                    <div className="flex items-center">
+                        <span className="text-sm text-gray-400">{ user.email }</span>
+                        <button
+                            onClick={logout}
+                            className="hidden md:flex ml-4 px-4 py-2 rounded-lg bg-gray-100 text-sm font-medium text-gray-700 hover:bg-teal-600 hover:text-white transition"
+                        >
+                            Logout
+                        </button>
+                    </div>
                 )}
                 <button className="md:hidden text-gray-700" onClick={() => setMenuOpen(!menuOpen)} >
                     {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

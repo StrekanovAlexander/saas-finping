@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { Check, X } from "lucide-react";
 import { useAuth } from "../../context/AuthContext.jsx";
-import Checkbox from "../../components/checkboxes/Checkbox.jsx";
+// import Checkbox from "../../components/checkboxes/Checkbox.jsx";
 
 function Login() {
   const { login } = useAuth();
@@ -13,12 +13,13 @@ function Login() {
   const [stayLogged, setStayLogged] = useState(false);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [demoMode, setDemoMode] = useState(false);
 
   const validateField = (field, value) => {
     let error = "";
     if (field === "email") {
       if (!value) {
-        error = "email ?";
+        error = "email is empty";
       } else if (!/\S+@\S+\.\S+/.test(value)) {
         error = "wrong email";
       }
@@ -26,7 +27,7 @@ function Login() {
 
     if (field === "password") {
       if (!value) {
-        error = "password ?";
+        error = "password is empty";
       } else if (value.length < 8) {
         error = "wrong password";
       }
@@ -69,7 +70,7 @@ function Login() {
       login(data.user, data.token);
       toast.success("Welcome back!");
 
-      navigate("/dashboard/trackings");
+      navigate("/manage/trackings");
     } catch (err) {
       console.error(err);
       toast.error("Server error");
@@ -79,9 +80,21 @@ function Login() {
     }
   }
 
+  function demoModeHandler(checked) {
+    setDemoMode(checked);
+    if (checked) {
+      setErrors({});
+      setEmail('demo@finping.space');
+      setPassword('demonstration');
+    } else {
+      setEmail('');
+      setPassword('');
+    }  
+  }
+
   return (
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto pt-12">
-      <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-4">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h3 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Login
@@ -107,8 +120,8 @@ function Login() {
                     validateField("email", e.target.value);
                   }}
                 />
-                {renderIcon("email", email)}
               </div>
+              { errors['email'] && <p className="text-sm text-red-600">{ errors['email'] }</p> }
             </div>
             <div>
               <label
@@ -130,15 +143,26 @@ function Login() {
                     validateField("password", e.target.value);
                   }}
                 />
-                {renderIcon("password", password)}
+              </div>
+              { errors['password'] && <p className="text-sm text-red-600">{ errors['password'] }</p> }
+            </div>
+            {/* Checkbox demo mode */}
+            <div className="flex items-start">
+              <div className="flex items-center h-5">
+                <input 
+                  className="w-4 h-4 text-teal-600 accent-teal-600 border-gray-200 rounded focus:ring-teal-500"
+                  id="isDemoMode"
+                  type="checkbox"
+                  checked={ demoMode }
+                  onChange={ (ev) => demoModeHandler(ev.target.checked) }
+                />
+              </div>    
+              <div className="ml-3 text-sm">
+                <label htmlFor="isDemoMode" className="font-medium text-orange-600">
+                  Demonstration mode
+                </label>
               </div>
             </div>
-            <Checkbox
-              name="stayLogged"
-              title="Stay logged in"
-              checked={stayLogged}
-              onChange={changeStayLogged}
-            />
 
             <div className="flex items-center justify-between">
               <button 

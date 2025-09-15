@@ -1,62 +1,41 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, User, BarChart2, Settings, Layers, Users  } from "lucide-react";
-import { useAuth } from "../../context/AuthContext.jsx";
+import { BarChart2, User } from "lucide-react";
+
+const navItems = [
+  { name: "Trackings", path: "/manage/trackings", icon: <BarChart2 size={18} /> },
+  { name: "Account", path: "/manage/account", icon: <User size={18} /> }
+];
 
 function Sidebar() {
-    const location = useLocation();
-    const { user } = useAuth();
+  const location = useLocation();
 
-    const navItems = [
-        { name: "Dashboard", path: "/dashboard/dashboard", icon: <Home size={18} /> },
-        { name: "Trackings", path: "/dashboard/trackings", icon: <BarChart2 size={18} /> },
-        { name: "Assets", path: "/dashboard/assets", icon: <Layers size={18} /> },
-        { name: "Account", path: "/dashboard/account", icon: <User size={18} /> },
-    ];
+  return (
+    <aside className="w-64 bg-white rounded-2xl shadow-md flex flex-col flex-shrink-0 self-start">
+      <div className="px-6 py-4 border-b border-gray-200">
+        <h3 className="text-xl font-bold text-teal-600">Control Panel</h3>
+      </div>
 
-    const adminItems = [
-        { name: "Settings", path: "/dashboard/settings", icon: <Settings size={18} /> },
-        { name: "Users", path: "/dashboard/users", icon: <Users size={18} /> },
-    ];
-
-    return (
-        <div className="w-64 bg-zinc-50 border rounded-lg p-4">
-            <nav className="space-y-2">
-                {navItems.map((item) => (
-                    <Link
-                        key={item.path}
-                        to={item.path}
-                        className={`flex items-center px-3 py-2 rounded-lg ${
-                            location.pathname === item.path
-                            ? "bg-emerald-100 text-emerald-700"
-                            : "text-gray-600 hover:bg-gray-100"
-                        }`}
-                    >
-                        {item.icon}
-                        <span className="ml-3">{item.name}</span>
-                    </Link>
-                ))}
-                {user?.role === "admin" && (
-                    <>
-                    <h3 className="mt-6 mb-2 text-sm font-semibold text-gray-500">Admin</h3>
-                        {adminItems.map((item) => (
-                            <Link
-                                key={item.path}
-                                to={item.path}
-                                className={`flex items-center px-3 py-2 rounded-lg ${
-                                    location.pathname === item.path
-                                        ? "bg-emerald-100 text-emerald-700"
-                                        : "text-gray-600 hover:bg-gray-100"
-                                }`}
-                            >
-                                {item.icon}
-                                <span className="ml-3">{item.name}</span>
-                            </Link>
-                        ))}
-                    </>
-                )}    
-            </nav>
-        </div>
-    );
+      <nav className="flex-1 px-4 py-6 flex flex-col gap-2 text-gray-700">
+        {navItems.map((el) => (
+          <Link
+            key={el.path}
+            to={el.path}
+            className={`flex items-center px-3 py-2 rounded-lg ${
+            location.pathname === el.path
+              ? "bg-teal-100 text-teal-700"
+              : "text-gray-600 hover:bg-gray-100"
+            }`}
+          >
+            {el.icon}
+            <span className="ml-3">{el.name}</span>
+          </Link>
+        ))}
+      </nav>
+      <div className="px-6 py-4 border-t border-gray-200 text-sm text-gray-400">
+        &copy; { new Date().getFullYear() } FinPing
+      </div>
+    </aside>
+  );
 }
 
 export default Sidebar;

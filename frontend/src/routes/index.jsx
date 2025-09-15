@@ -1,12 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute.jsx"; 
 import AdminRoute from "./AdminRoute.jsx"; 
-import { PublicLayout, PrivateLayout } from "../components/layouts/index.jsx";
+import ControlPanelRoute from "./ControlPanelRoute.jsx"; 
+import { PublicLayout, PrivateLayout, ControlPanelLayout } from "../components/layouts/index.jsx";
 import { 
     Home, 
     HowItWorks,
     Contacts,
     AssetsPage,
+    AboutPage,
     Dashboard, 
     Login,
     Logout,
@@ -26,14 +28,20 @@ export default function() {
                 <Route path="/assets" element={<AssetsPage />} />
                 <Route path="/how-it-works" element={<HowItWorks />} />
                 <Route path="/contacts" element={<Contacts />} />
+                <Route path="/about" element={<AboutPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+            </Route>
+
+            <Route element={<ControlPanelRoute />}>
+                <Route element={<ControlPanelLayout />}>
+                    <Route path="/manage/trackings" element={<Trackings />} />
+                </Route>
             </Route>
 
             <Route element={<PrivateRoute />}>
                 <Route element={<PrivateLayout />}>
                     <Route path="/dashboard/dashboard" element={<Dashboard />} />
-                    <Route path="/dashboard/trackings" element={<Trackings />} />
                     <Route path="/dashboard/assets" element={<Assets />} />
                     <Route path="/dashboard/account" element={<UserAccount />} />
                     <Route path="/logout" element={<Logout />} />

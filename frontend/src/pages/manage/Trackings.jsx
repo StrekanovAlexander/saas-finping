@@ -1,0 +1,202 @@
+import { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext.jsx";
+import Spinner from "../../components/spinner/Spinner.jsx";
+import { formatDate, formatNumber } from "../../utils/formats.jsx";
+
+export default function TrackingsPage() {
+    const { user, token } = useAuth();
+    const [lastUpdated, setLastUpdated] = useState(new Date());
+    const [search, setSearch] = useState("");
+    const [filterType, setFilterType] = useState("");
+    const [filterSource, setFilterSource] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [trackings, setTrackings] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setLastUpdated(new Date());
+        }, 60 * 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    async function fetchTrackings() {
+        try {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/trackings/user/me`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message || "Failed to load trackings");
+            setTrackings(data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        if (user?.id) {
+            fetchTrackings();
+        }
+    }, [user?.id]);
+
+    const filteredTrackings = trackings.filter((t) => {
+        const matchesSearch = 
+            t.Asset.name.toLowerCase().includes(search.toLowerCase()) ||
+            t.Asset.symbol.toLowerCase().includes(search.toLowerCase());
+            const matchesType = filterType ? t.Asset.type === filterType : true;
+            const matchesSource = filterSource ? t.Asset.dataSource === filterSource : true;
+            return matchesSearch && matchesType && matchesSource;
+    });
+    
+    const minutesAgo = Math.floor((new Date() - lastUpdated) / 60000);
+
+    return (
+        <div className="container mx-auto px-4 py-8">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-2">
+                <h1 className="text-3xl font-bold text-gray-800">Trackings</h1>
+                <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="px-4 py-2 bg-teal-600 text-white rounded-lg shadow hover:bg-teal-700 transition"
+                >
+                    + Add Tracking
+                </button>
+            </div>
+            <p className="text-gray-500 mb-6">
+                Your active alerts and tracked assets
+            </p>
+
+            {/* Filtering */}
+            <div className="bg-white rounded-2xl shadow-sm p-4 mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <input
+                        type="text"
+                        placeholder="Search by name or symbol"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    />
+                    <select
+                        value={filterType}
+                        onChange={(e) => setFilterType(e.target.value)}
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    >
+                        <option value="">All types</option>
+                        <option value="crypto">Crypto</option>
+                        <option value="fiat">Fiat</option>
+                        <option value="commodity">Commodity</option>
+                    </select>
+                    <select
+                        value={filterSource}
+                        onChange={(e) => setFilterSource(e.target.value)}
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    >
+                        <option value="">All sources</option>
+                        <option value="coingecko">CoinGecko</option>
+                        <option value="yahoo">Yahoo Finance</option>
+                        <option value="fxrates">FXRates</option>
+                    </select>
+                </div>
+            </div>
+
+            {loading && <div><Spinner /></div>}
+            {error && <p className="text-red-500">Error: {error}</p>}
+
+            {/* Table */}
+            {!loading && !error && (
+            <div className="bg-white rounded-2xl shadow-md p-6">
+                <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-xl font-semibold text-gray-800">
+                        Tracked Assets
+                    </h2>
+                    <div className="flex items-center text-sm text-gray-500">
+                        <span className="relative flex h-3 w-3 mr-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
+                        </span>
+                        Updated {minutesAgo === 0 ? "just now" : `${minutesAgo} min ago`}
+                    </div>
+                </div>
+
+                <div className="overflow-x-auto">
+                    <table className="w-full border-collapse rounded-xl overflow-hidden">
+                        <thead className="bg-gray-100 text-gray-600 text-sm">
+                            <tr>
+                                <th className="text-left py-3 px-4">Name</th>
+                                <th className="text-left py-3 px-4">Type</th>
+                                <th className="text-left py-3 px-4">Source</th>
+                                <th className="text-right py-3 px-4">Threshold</th>
+                                <th className="text-right py-3 px-4">Direction</th>
+                                <th className="text-right py-3 px-4">Last Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody className="text-sm">
+                            {filteredTrackings.length > 0 ? (
+                                filteredTrackings.map((t, idx) => (
+                                    <tr
+                                        key={idx}
+                                        className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition"
+                                    >
+                                        <td className="py-3 px-4 font-medium">{t.Asset.name} ({t.Asset.symbol})</td>
+                                        <td className="py-3 px-4 capitalize">{t.Asset.type}</td>
+                                        <td className="py-3 px-4 capitalize">{t.Asset.dataSource}</td>
+                                        <td className="py-3 px-4 text-right">
+                                            {formatNumber(t.threshold)}
+                                        </td>
+                                        <td className="py-3 px-4 text-right">
+                                            {t.direction === "above" && (
+                                                <span className="text-green-600 font-medium">
+                                                    {t.direction}
+                                                </span>
+                                            )}
+                                            {t.direction === "below" && (
+                                                <span className="text-red-600 font-medium">
+                                                    {t.direction}
+                                                </span>
+                                            )}
+                                        </td>
+                                        <td className="px-4 py-3 text-gray-400 text-xs text-right">{formatDate(t.updatedAt)}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td
+                                        colSpan="8"
+                                        className="py-6 text-center text-gray-500 italic"
+                                    >
+                                        No trackings found
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            )}
+            
+            {/* MODAL */}
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative">
+                        <button
+                            onClick={() => setIsModalOpen(false)}
+                            className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
+                        >
+                            ✕
+                        </button>
+                        <h3 className="text-lg font-semibold mb-4">New Tracking</h3>
+                        <div className="text-gray-500 text-sm italic">
+                            (Form will be here soon...)
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}

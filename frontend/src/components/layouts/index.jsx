@@ -19,12 +19,28 @@ export function PrivateLayout() {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <Header />
-            <div className="flex flex-1 border bg-zinc-100 rouded-lg p-4">
+            
+            <div className="flex flex-1 container mx-auto px-4">
                 <Sidebar />
-                <main className="flex-1 bg-zinc-50 border rounded-lg px-5 ml-4">
+                <main className="flex-1 p-4">
                     <Outlet />
                 </main>
             </div>
         </div>
     );
+}
+
+export function ControlPanelLayout() {
+  return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <Header />
+      <div className="container mx-auto flex flex-1 px-4 py-6 gap-6">
+        <Sidebar />
+        <main className="flex-1 p-6">
+          <Outlet />
+        </main>
+      </div>
+      <Footer />
+    </div>
+  );
 }
