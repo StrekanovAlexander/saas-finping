@@ -24,6 +24,7 @@ function CardAsset({ title, description, data }) {
           <tbody>
             {data.map((el) => {
               const isUp = el.price > el.previousPrice;
+              const isDown = el.price < el.previousPrice;
               const change = el.price - el.previousPrice;
               const percent = ((change / el.previousPrice) * 100).toFixed(2);
               return (
@@ -34,17 +35,22 @@ function CardAsset({ title, description, data }) {
                   <td className="px-4 py-3 text-gray-700 text-end">
                     {formatNumber(el.price)}
                   </td>
-                  <td
-                     className={`flex items-center justify-end px-4 py-3 text-end font-semibold ${
-                       isUp ? "text-green-600" : "text-red-600"
-                     }`}
-                   >
-                     {isUp ? (
-                       <ArrowUpRight size={16} />
-                     ) : (
-                       <ArrowDownRight size={16} />
-                     )}
-                     {percent}%
+                  <td className="py-3 px-4 text-right">
+                    {isUp && (
+                      <span className="flex items-center justify-end text-green-600">
+                        <ArrowUpRight className="h-4 w-4 mr-1" />
+                        { percent }%
+                      </span>
+                    )}
+                    {isDown && (
+                      <span className="flex items-center justify-end text-red-600">
+                        <ArrowDownRight className="h-4 w-4 mr-1" />
+                        { percent }%
+                      </span>
+                    )}
+                    {!isUp && !isDown && (
+                      <span className="text-gray-500">No change</span>
+                    )}
                    </td>
                   <td className="px-4 py-3 text-gray-400 text-xs text-start">
                     {formatDate(el.lastUpdated)}
