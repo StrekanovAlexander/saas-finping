@@ -1,9 +1,7 @@
 import cors from 'cors'
 import express from 'express';
 import { assetRoutes, trackingRoutes, userRoutes } from './src/routes/index.js';
-// import './src/cron/checkTrackings.js';
-// import './src/cron/updateAssets.js';
-import { updateAssetPrices } from './src/services/priceUpdater.js';
+import { updateAssetPrices, runUpdateAssetPrices } from './src/services/priceUpdater.js';
 
 const app = express();
 app.use(cors());
@@ -15,6 +13,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   res.json({ message: 'Backend is running!' });
+});
+
+app.get("/update", async (req, res) => {
+  try {
+    await runUpdateAssetPrices();
+    res.json({ success: true, message: "Database is connected!" });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
 });
 
 app.get("/test-db", async (req, res) => {
