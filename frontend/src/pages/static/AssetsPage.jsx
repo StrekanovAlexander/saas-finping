@@ -112,8 +112,8 @@ export default function AssetsPage() {
                 <th className="text-left py-3 px-4">Symbol</th>
                 <th className="text-left py-3 px-4">Type</th>
                 <th className="text-left py-3 px-4">Source</th>
-                <th className="text-right py-3 px-4">Price, $</th>
-                <th className="text-right py-3 px-4">Prev. Price, $</th>
+                <th className="text-right py-3 px-4">Price</th>
+                <th className="text-right py-3 px-4">Prev. Price</th>
                 <th className="text-right py-3 px-4">Trend</th>
                 <th className="text-right py-3 px-4">Last Updated</th>
               </tr>

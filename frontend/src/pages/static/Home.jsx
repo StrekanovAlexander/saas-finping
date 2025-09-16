@@ -98,12 +98,12 @@ function Home() {
               >
                 Get Started
               </Link>
-              <Link
+              {/* <Link
                 className="px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-xl font-semibold shadow hover:bg-gray-100 transition"
                 to="/how-it-works"
               >
                 Learn More
-              </Link>
+              </Link> */}
             </div>
           </div>
         </section>
