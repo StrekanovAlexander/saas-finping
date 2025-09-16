@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 app.get("/update", async (req, res) => {
   try {
     await runUpdateAssetPrices();
-    res.json({ success: true, message: "Database is connected!" });
+    res.json({ success: true, message: "Database was updated!" });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
@@ -25,7 +25,7 @@ app.get("/update", async (req, res) => {
 
 app.get("/test-db", async (req, res) => {
   try {
-    await updateAssetPrices();
+    // await updateAssetPrices();
     res.json({ success: true, message: "Database is connected!" });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
