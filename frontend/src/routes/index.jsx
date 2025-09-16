@@ -13,6 +13,7 @@ import {
     Logout,
     Register,
     Account, 
+    Notifications,
     Trackings,
     Users
 } from "../pages/index.jsx";
@@ -32,8 +33,9 @@ export default function() {
 
             <Route element={<ControlPanelRoute />}>
                 <Route element={<ControlPanelLayout />}>
-                    <Route path="/manage/trackings" element={<Trackings />} />
                     <Route path="/manage/account" element={<Account />} />
+                    <Route path="/manage/notifications" element={<Notifications />} />
+                    <Route path="/manage/trackings" element={<Trackings />} />
                 </Route>
             </Route>
 

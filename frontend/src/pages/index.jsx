@@ -8,8 +8,9 @@ import Login from "./auth/Login.jsx";
 import Logout from "./auth/Logout.jsx";
 import Register from "./auth/Register.jsx";
 
-import Trackings from "./manage/Trackings.jsx";
 import Account from "./manage/Account.jsx";
+import Notifications from "./manage/Notifications.jsx";
+import Trackings from "./manage/Trackings.jsx";
 import Users from "./manage/Users.jsx";
 
 export { 
@@ -22,6 +23,7 @@ export {
     Logout,
     Register,
     Account,
+    Notifications,
     Trackings,
     Users
 };

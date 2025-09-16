@@ -1,8 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-import { BarChart2, User } from "lucide-react";
+import { BarChart2, BellRing, User } from "lucide-react";
 
 const navItems = [
   { name: "Trackings", path: "/manage/trackings", icon: <BarChart2 size={18} /> },
+  { name: "Notifications", path: "/manage/notifications", icon: <BellRing size={18} /> },
   { name: "Account", path: "/manage/account", icon: <User size={18} /> }
 ];
 
