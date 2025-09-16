@@ -11,6 +11,10 @@ const Tracking = sequelize.define('Tracking', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    price: {
+        type: DataTypes.DECIMAL(20,8),
+        allowNull: false,
+    },
     threshold: {
         type: DataTypes.DECIMAL(20,8),
         allowNull: false,

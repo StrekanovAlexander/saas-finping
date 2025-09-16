@@ -17,7 +17,7 @@ router.post('/', createTracking);
 router.get('/', getTrackings);
 router.get('/:id', getTracking);
 router.put('/:id', updateTracking);
-router.delete('/:id', deleteTracking);
+router.delete('/:id', authMiddleware, deleteTracking);
 
 // router.get('/user/:userId', getUserTrackings);
 router.get('/user/me', authMiddleware, getUserTrackings);

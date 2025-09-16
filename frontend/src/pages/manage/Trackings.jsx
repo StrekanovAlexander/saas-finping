@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { Trash2 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import FormCreateTracking from "../../components/modals/FormCreateTracking.jsx";
+import FormDeleteTracking from "../../components/modals/FormDeleteTracking.jsx";
 import Spinner from "../../components/spinner/Spinner.jsx";
 import { formatDate, formatNumber } from "../../utils/formats.jsx";
 
@@ -10,7 +12,9 @@ export default function Trackings() {
     const [search, setSearch] = useState("");
     const [filterType, setFilterType] = useState("");
     const [filterSource, setFilterSource] = useState("");
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isFormCreateOpen, setIsFormCreateOpen] = useState(false);
+    const [isFormDeleteOpen, setIsFormDeleteOpen] = useState(false);
+    const [tracking, setTracking] = useState(null);
     const [trackings, setTrackings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -57,13 +61,35 @@ export default function Trackings() {
     
     const minutesAgo = Math.floor((new Date() - lastUpdated) / 60000);
 
+    async function handleDelete(tracking) {
+        try {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/trackings/${tracking.id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+            });
+
+            if (!res.ok) {
+                throw new Error("Failed to delete tracking");
+            }
+            fetchTrackings();
+        } catch (err) {
+            console.error("Error:", err);
+        } finally {
+            setIsFormDeleteOpen(false);
+        }
+        setIsFormDeleteOpen(false);
+    }
+    
     return (
         <div className="container mx-auto px-4 py-8">
             {/* Header */}
             <div className="flex items-center justify-between mb-2">
                 <h1 className="text-3xl font-bold text-gray-800">Trackings</h1>
                 <button
-                    onClick={() => setIsModalOpen(true)}
+                    onClick={() => setIsFormCreateOpen(true)}
                     className="px-4 py-2 bg-teal-600 text-white rounded-lg shadow hover:bg-teal-700 transition"
                 >
                     + Add Tracking
@@ -128,9 +154,12 @@ export default function Trackings() {
                                     <th className="text-left py-3 px-4">Name</th>
                                     <th className="text-left py-3 px-4">Type</th>
                                     <th className="text-left py-3 px-4">Source</th>
+                                    <th className="text-right py-3 px-4">Price</th>
                                     <th className="text-right py-3 px-4">Threshold</th>
-                                    <th className="text-right py-3 px-4">Direction</th>
-                                    <th className="text-right py-3 px-4">Last Updated</th>
+                                    <th className="text-center py-3 px-4">Direction</th>
+                                    <th className="text-center py-3 px-4">Active</th>
+                                    <th className="text-left py-3 px-4">Last Updated</th>
+                                    <th className="text-left py-3 px-4"></th>
                                 </tr>
                             </thead>
                             <tbody className="text-sm">
@@ -144,11 +173,14 @@ export default function Trackings() {
                                         <td className="py-3 px-4 capitalize">{t.Asset.type}</td>
                                         <td className="py-3 px-4 capitalize">{t.Asset.dataSource}</td>
                                         <td className="py-3 px-4 text-right">
-                                            {formatNumber(t.threshold)}
+                                            {formatNumber(t.price)}
                                         </td>
                                         <td className="py-3 px-4 text-right">
+                                            {formatNumber(t.threshold)}
+                                        </td>
+                                        <td className="py-3 px-4 text-center">
                                             {t.direction === "above" && (
-                                                <span className="text-green-600 font-medium">
+                                                <span className="text-teal-600 font-medium">
                                                     {t.direction}
                                                 </span>
                                             )}
@@ -158,7 +190,19 @@ export default function Trackings() {
                                                 </span>
                                             )}
                                         </td>
-                                        <td className="px-4 py-3 text-gray-400 text-xs text-right">{formatDate(t.updatedAt)}</td>
+                                        <td className="py-3 px-4 text-center">
+                                            <input type="radio" checked={t.active} readOnly className="accent-teal-600" />
+                                        </td>
+                                        <td className="px-4 py-3 text-gray-400 text-xs text-left">{formatDate(t.updatedAt)}</td>
+                                            <td>
+                                                <Trash2 
+                                                    className="w-5 h-5 text-gray-400 hover:text-orange-500 hover:cursor-pointer" 
+                                                    onClick={() => {
+                                                        setTracking(t);
+                                                        setIsFormDeleteOpen(true);
+                                                    }}
+                                                />
+                                            </td>
                                     </tr>
                                 ))
                             ) : (
@@ -176,10 +220,17 @@ export default function Trackings() {
                 </div>
             </div>
             )}
-            {isModalOpen && (
+            {isFormCreateOpen && (
                 <FormCreateTracking 
-                    onClose={() => setIsModalOpen(false)} 
+                    onClose={() => setIsFormCreateOpen(false)} 
                     onCreated={() => fetchTrackings()}
+                />
+            )}
+            {isFormDeleteOpen && (
+                <FormDeleteTracking 
+                    onClose={() => setIsFormDeleteOpen(false)} 
+                    onConfirm={handleDelete}
+                    tracking={tracking}
                 />
             )}
         </div>

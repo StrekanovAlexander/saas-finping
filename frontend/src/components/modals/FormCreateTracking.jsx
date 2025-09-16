@@ -4,14 +4,20 @@ import { useAuth } from "../../context/AuthContext.jsx";
 export default function FormCreateTracking({ onClose, onCreated }) {
     const { user } = useAuth();
     const [assets, setAssets] = useState([]);
+    const [filteredAssets, setFilteredAssets] = useState([]);
+    const [type, setType] = useState("");
     const [assetId, setAssetId] = useState("");
+    const [price, setPrice] = useState("");
     const [threshold, setThreshold] = useState("");
     const [direction, setDirection] = useState("above");
     
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_URL}/assets`)
             .then((res) => res.json())
-            .then((data) => setAssets(data))
+            .then((data) => {
+                setAssets(data)
+                setFilteredAssets(data)
+            })
             .catch(() => setAssets([]));
     }, []);
 
@@ -21,7 +27,7 @@ export default function FormCreateTracking({ onClose, onCreated }) {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/trackings`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ assetId, threshold, direction, userId: user.id, }),
+                body: JSON.stringify({ assetId, price, threshold, direction, userId: user.id, }),
             });
 
             if (!res.ok) throw new Error("Failed to create tracking");
@@ -44,23 +50,67 @@ export default function FormCreateTracking({ onClose, onCreated }) {
                 <form className="space-y-4" onSubmit={handleSubmit}>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Type
+                        </label>
+
+                        <select
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500"
+                            value={type}
+                            onChange={(e) => {
+                                const value = e.target.value; 
+                                setType(value);
+                                setAssetId("");
+                                setPrice("");
+                                setFilteredAssets(assets.filter(el => el.type === value));
+                            }}
+                            required
+                        >
+                            <option value="" disabled>
+                                Select type
+                            </option>
+                            <option value="crypto">Crypto</option>
+                            <option value="fiat">Fiat</option>
+                            <option value="commodity">Commodity</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
                             Asset
                         </label>
                         <select
                             className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500"
                             value={assetId}
-                            onChange={(e) => setAssetId(e.target.value)}
+                            onChange={(e) => {
+                                setAssetId(e.target.value);
+                                const currentPrice = assets.filter(el => el.id == e.target.value)[0].price || 0;
+                                setPrice(currentPrice);
+                            }}
                             required
                         >
                             <option value="" disabled>
                                 Select asset
                             </option>
-                            {assets.map((asset) => (
+                            {filteredAssets.map((asset) => (
                                 <option key={asset.id} value={asset.id}>
                                     {asset.name} ({asset.symbol})
                                 </option>
                             ))}
                         </select>
+                    </div>
+                    {/* Price */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Current price
+                        </label>
+                        <input
+                            readOnly={true}
+                            disabled={false}
+                            value={price}
+                            type="number"
+                            step="0.01"
+                            placeholder="Current price"
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500"
+                        />
                     </div>
                     {/* Threshold */}
                     <div>
