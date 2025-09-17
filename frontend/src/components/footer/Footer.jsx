@@ -1,4 +1,4 @@
-import { Github, Twitter, Linkedin } from "lucide-react";
+import { Github, Twitter, Linkedin, Facebook } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -48,6 +48,13 @@ export default function Footer() {
                 className="text-gray-500 hover:text-teal-600 transition"
               >
                 <Github className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=100004673166846"
+                target="_blank"
+                className="text-gray-500 hover:text-teal-600 transition"
+              >
+                <Facebook className="w-5 h-5" />
               </a>
             </div>
           </div>

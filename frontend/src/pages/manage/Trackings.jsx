@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Trash2 } from "lucide-react";
+import { ArrowUpRight, ArrowDownRight, Trash2 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import FormCreateTracking from "../../components/modals/FormCreateTracking.jsx";
 import FormDeleteTracking from "../../components/modals/FormDeleteTracking.jsx";
@@ -155,8 +155,8 @@ export default function Trackings() {
                                     <th className="text-left py-3 px-4">Type</th>
                                     <th className="text-left py-3 px-4">Source</th>
                                     <th className="text-right py-3 px-4">Price</th>
-                                    <th className="text-right py-3 px-4">Threshold</th>
                                     <th className="text-center py-3 px-4">Direction</th>
+                                    <th className="text-right py-3 px-4">Threshold</th>
                                     <th className="text-center py-3 px-4">Active</th>
                                     <th className="text-left py-3 px-4">Last Updated</th>
                                     <th className="text-left py-3 px-4"></th>
@@ -175,21 +175,23 @@ export default function Trackings() {
                                         <td className="py-3 px-4 text-right">
                                             {formatNumber(t.price)}
                                         </td>
-                                        <td className="py-3 px-4 text-right">
-                                            {formatNumber(t.threshold)}
-                                        </td>
-                                        <td className="py-3 px-4 text-center">
+                                        <td className="py-3 px-4">
                                             {t.direction === "above" && (
-                                                <span className="text-teal-600 font-medium">
-                                                    {t.direction}
+                                                <span className="flex items-center justify-center text-teal-600">
+                                                    <ArrowUpRight className="h-4 w-4 mr-1" />
+                                                    { t.direction }
                                                 </span>
                                             )}
                                             {t.direction === "below" && (
-                                                <span className="text-red-600 font-medium">
-                                                    {t.direction}
+                                                <span className="flex items-center justify-center text-red-600">
+                                                    <ArrowDownRight className="h-4 w-4 mr-1" />
+                                                    { t.direction }
                                                 </span>
                                             )}
                                         </td>
+                                        <td className="py-3 px-4 text-right">
+                                            {formatNumber(t.threshold)}
+                                        </td>                                        
                                         <td className="py-3 px-4 text-center">
                                             <input type="radio" checked={t.active} readOnly className="accent-teal-600" />
                                         </td>

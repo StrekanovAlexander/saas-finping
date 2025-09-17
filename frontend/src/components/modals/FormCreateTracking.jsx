@@ -23,6 +23,7 @@ export default function FormCreateTracking({ onClose, onCreated }) {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        if (!threshold) return;
         try {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/trackings`, {
                 method: "POST",
@@ -63,7 +64,6 @@ export default function FormCreateTracking({ onClose, onCreated }) {
                                 setPrice("");
                                 setFilteredAssets(assets.filter(el => el.type === value));
                             }}
-                            required
                         >
                             <option value="" disabled>
                                 Select type
