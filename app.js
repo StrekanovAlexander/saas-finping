@@ -1,6 +1,6 @@
 import cors from 'cors'
 import express from 'express';
-import { assetRoutes, trackingRoutes, userRoutes } from './src/routes/index.js';
+import { assetRoutes, notificationRoutes, trackingRoutes, userRoutes } from './src/routes/index.js';
 import { updateAssetPrices, runUpdateAssetPrices } from './src/services/priceUpdater.js';
 
 const app = express();
@@ -33,6 +33,7 @@ app.get("/test-db", async (req, res) => {
 });
 
 app.use('/api/assets', assetRoutes);
+app.use('/api/notifications', notificationRoutes);
 app.use('/api/trackings', trackingRoutes);
 app.use('/api/users', userRoutes);
 
