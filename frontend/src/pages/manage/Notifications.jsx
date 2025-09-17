@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Trash2 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import Spinner from "../../components/spinner/Spinner.jsx";
 import { formatDate } from "../../utils/formats.jsx";
@@ -8,6 +7,8 @@ export default function Notifications() {
     const { user, token } = useAuth();
     const [lastUpdated, setLastUpdated] = useState(new Date());
     const [notifications, setNotifications] = useState([]);
+    const [filterType, setFilterType] = useState("");
+    const [filterSource, setFilterSource] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -44,7 +45,11 @@ export default function Notifications() {
         }
     }, [user?.id]);
 
-    const filteredNotifications = notifications;
+    const filteredNotifications = notifications.filter((el) => {
+        const matchesType = filterType ? el.Asset.type === filterType : true;
+        const matchesSource = filterSource ? el.Asset.dataSource === filterSource : true;
+        return matchesType && matchesSource;
+    });
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -52,14 +57,14 @@ export default function Notifications() {
                 <h1 className="text-3xl font-bold text-gray-800">Notifications</h1>
             </div>
             <p className="text-gray-500 mb-6">
-                Spent notifications 
+                Received messages 
             </p>
             {/* Filtering */}
             <div className="bg-white rounded-2xl shadow-sm p-4 mb-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <select
-                        value="1"
-                        onChange={(e) => console.log(e.target.value)}
+                        value={filterType}
+                        onChange={(e) => setFilterType(e.target.value)}
                         className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
                     >
                         <option value="">All types</option>
@@ -68,8 +73,8 @@ export default function Notifications() {
                         <option value="commodity">Commodity</option>
                     </select>
                     <select
-                        value="1"
-                        onChange={(e) => console.log(e.target.value)}
+                        value={filterSource}
+                        onChange={(e) => setFilterSource(e.target.value)}
                         className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
                     >
                         <option value="">All sources</option>
@@ -104,8 +109,8 @@ export default function Notifications() {
                                     <th className="text-left py-3 px-4">Type</th>
                                     <th className="text-left py-3 px-4">Source</th>
                                     <th className="text-left py-3 px-4">Message</th>
+                                    <th className="text-left py-3 px-4">Channel</th>
                                     <th className="text-left py-3 px-4">Created at</th>
-                                    <th className="text-left py-3 px-4"></th>
                                 </tr>
                             </thead>
                             <tbody className="text-sm">
@@ -118,17 +123,9 @@ export default function Notifications() {
                                         <td className="py-3 px-4 font-medium">{t.Asset.name} ({t.Asset.symbol})</td>
                                         <td className="py-3 px-4 capitalize">{t.Asset.type}</td>
                                         <td className="py-3 px-4 capitalize">{t.Asset.dataSource}</td>
-                                        <td className="py-3 px-4 capitalize">{t.message}</td>
-                                        <td className="px-4 py-3 text-gray-400 text-sm text-left">{formatDate(t.createdAt)}</td>
-                                            <td>
-                                                <Trash2 
-                                                    className="w-5 h-5 text-gray-400 hover:text-orange-500 hover:cursor-pointer" 
-                                                    onClick={() => {
-                                                        setTracking(t);
-                                                        setIsFormDeleteOpen(true);
-                                                    }}
-                                                />
-                                            </td>
+                                        <td className="py-3 px-4">{t.message}</td>
+                                        <td className="py-3 px-4">{t.channel}</td>
+                                        <td className="px-3 py-4 text-xs text-gray-400">{formatDate(t.createdAt)}</td>
                                     </tr>
                                 ))
                             ) : (
@@ -144,6 +141,9 @@ export default function Notifications() {
                         </tbody>
                     </table>
                 </div>
+                <p className="text-sm text-gray-500 mt-4">
+                    * Each notification is stored for exactly one week from the date of its creation. After that, it is automatically deleted. 
+                </p>
             </div>
             )}
         </div>

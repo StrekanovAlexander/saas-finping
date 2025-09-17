@@ -2,6 +2,7 @@ import cors from 'cors'
 import express from 'express';
 import { assetRoutes, notificationRoutes, trackingRoutes, userRoutes } from './src/routes/index.js';
 import { updateAssetPrices, runUpdateAssetPrices } from './src/services/priceUpdater.js';
+import { checkTrackings } from './src/services/trackingService.js';
 
 const app = express();
 app.use(cors());
@@ -26,6 +27,7 @@ app.get("/update", async (req, res) => {
 app.get("/test-db", async (req, res) => {
   try {
     // await updateAssetPrices();
+    await checkTrackings();
     res.json({ success: true, message: "Database is connected!" });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });

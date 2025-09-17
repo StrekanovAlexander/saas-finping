@@ -15,6 +15,11 @@ const Notification = sequelize.define('Notification', {
         type: DataTypes.STRING,
         allowNull: true,
     },
+    channel: {
+        type: DataTypes.ENUM('email', 'telegram'),
+        allowNull: false,
+        defaultValue: 'email',
+    },
 }, {
     tableName: 'notifications',
 });

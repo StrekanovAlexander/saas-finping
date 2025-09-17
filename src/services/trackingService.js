@@ -1,9 +1,6 @@
-import { Asset, Tracking } from '../models/index.js';
+import { Asset, Notification, Tracking } from '../models/index.js';
+import { formatNumber } from '../utils/formats.js';
 
-/**
- * Check all active trackings and send alerts if conditions are met.
- * Limits number of notifications and respects minimal interval between alerts.
- */
 export async function checkTrackings() {
     try {
         const trackings = await Tracking.findAll({
@@ -27,15 +24,23 @@ export async function checkTrackings() {
                 const now = new Date();
                 const lastNotified = tracking.lastNotifiedAt ? new Date(tracking.lastNotifiedAt) : null;
                 const minutesSinceLast = lastNotified ? (now - lastNotified) / (1000 * 60) : Infinity;
-
                 // Limit notifications checking
                 if (tracking.notificationsSent < tracking.maxNotifications &&
                     minutesSinceLast >= tracking.notificationIntervalMinutes) {
-                    // (Email/Telegram)
-                    console.log(`🔔 ALERT: ${asset.name} (${asset.symbol}) price ${price} ${tracking.direction} threshold ${threshold} [Channel: ${tracking.channel}]`);
-                
-                    tracking.notificationsSent += 1;
-                    tracking.lastNotifiedAt = now;
+                    // Notifications
+                    // console.log(`ALERT: ${asset.name} (${asset.symbol}) price ${price} ${tracking.direction} threshold ${threshold} [Channel: ${tracking.channel}]`);
+                    const { assetId, userId, channel } = tracking;
+                    const message = `${asset.name} (${asset.symbol}) price ${formatNumber(price)} ${tracking.direction} threshold ${formatNumber(threshold)}`;    
+
+                    try {
+                        await Notification.create({ assetId, userId, message, channel });
+                    } catch (err) {
+                        console.log(err);
+                    }    
+
+                    // tracking.notificationsSent += 1;
+                    // tracking.lastNotifiedAt = now;
+                    tracking.active = false;
                     await tracking.save();
                 }
             }

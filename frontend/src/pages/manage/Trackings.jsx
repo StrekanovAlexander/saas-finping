@@ -154,7 +154,7 @@ export default function Trackings() {
                                     <th className="text-left py-3 px-4">Name</th>
                                     <th className="text-left py-3 px-4">Type</th>
                                     <th className="text-left py-3 px-4">Source</th>
-                                    <th className="text-right py-3 px-4">Price</th>
+                                    <th className="text-right py-3 px-4">Curr. Price</th>
                                     <th className="text-center py-3 px-4">Direction</th>
                                     <th className="text-right py-3 px-4">Threshold</th>
                                     <th className="text-center py-3 px-4">Active</th>
@@ -220,6 +220,9 @@ export default function Trackings() {
                         </tbody>
                     </table>
                 </div>
+                <p className="text-sm text-gray-500 mt-4">
+                    * Each tracking record is stored for exactly one week after its deactivation and the notification you received. After that, it is automatically deleted. You can also delete it manually. 
+                </p>
             </div>
             )}
             {isFormCreateOpen && (
