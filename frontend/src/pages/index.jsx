@@ -6,7 +6,7 @@ import AboutPage from "./static/AboutPage.jsx";
 
 import LoginPage from "./auth/LoginPage.jsx";
 import Logout from "./auth/Logout.jsx";
-import Register from "./auth/Register.jsx";
+import RegisterPage from "./auth/RegisterPage.jsx";
 
 import Account from "./manage/Account.jsx";
 import Notifications from "./manage/Notifications.jsx";
@@ -21,7 +21,7 @@ export {
     AboutPage, 
     LoginPage,
     Logout,
-    Register,
+    RegisterPage,
     Account,
     Notifications,
     Trackings,

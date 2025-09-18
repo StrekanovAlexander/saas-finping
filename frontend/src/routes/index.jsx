@@ -11,7 +11,7 @@ import {
     AboutPage,
     LoginPage,
     Logout,
-    Register,
+    RegisterPage,
     Account, 
     Notifications,
     Trackings,
@@ -28,7 +28,7 @@ export default function() {
                 <Route path="/contacts" element={<ContactsPage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/register" element={<RegisterPage />} />
             </Route>
 
             <Route element={<ControlPanelRoute />}>
