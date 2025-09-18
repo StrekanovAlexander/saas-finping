@@ -4,7 +4,7 @@ import ContactsPage from "./static/ContactsPage.jsx";
 import AssetsPage from "./static/AssetsPage.jsx";
 import AboutPage from "./static/AboutPage.jsx";
 
-import Login from "./auth/Login.jsx";
+import LoginPage from "./auth/LoginPage.jsx";
 import Logout from "./auth/Logout.jsx";
 import Register from "./auth/Register.jsx";
 
@@ -19,7 +19,7 @@ export {
     ContactsPage,
     AssetsPage,
     AboutPage, 
-    Login,
+    LoginPage,
     Logout,
     Register,
     Account,

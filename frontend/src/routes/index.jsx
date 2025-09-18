@@ -9,7 +9,7 @@ import {
     ContactsPage,
     AssetsPage,
     AboutPage,
-    Login,
+    LoginPage,
     Logout,
     Register,
     Account, 
@@ -27,7 +27,7 @@ export default function() {
                 <Route path="/how" element={<HowItWorksPage />} />
                 <Route path="/contacts" element={<ContactsPage />} />
                 <Route path="/about" element={<AboutPage />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<Register />} />
             </Route>
 
