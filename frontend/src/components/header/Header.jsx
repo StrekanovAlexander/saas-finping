@@ -52,7 +52,7 @@ export default function Header() {
                     }
                     <Link
                         to="/about"
-                        className="text-orange-600 hover:text-orange-700 transition"
+                        className="text-teal-600 hover:text-teal-700 transition"
                     >
                         About project
                     </Link>

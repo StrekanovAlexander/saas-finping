@@ -18,3 +18,16 @@ export async function sendActivationToken(email, token) {
         console.error(`Email sending error: `, err.message);
     }
 }
+
+export async function sendNotification(email, htmlContent) {
+    try {
+        await resend.emails.send({
+            from: '"FinPing Service" <no-reply@finping.space>',
+            to: email,
+            subject: "Price Alert: Updates on your tracked assets",
+            html: htmlContent,
+        });
+    } catch(err) {
+        console.error(`Email sending error: `, err.message);
+    }
+}

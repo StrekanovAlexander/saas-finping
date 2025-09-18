@@ -25,5 +25,3 @@ export async function sendActivationEmail(email, token) {
         console.error(`Email sending error: `, err.message);
     }
 }
-
-
