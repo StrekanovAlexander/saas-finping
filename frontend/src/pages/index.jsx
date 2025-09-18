@@ -1,6 +1,6 @@
-import Home from "./static/Home.jsx";
-import HowItWorks from "./static/HowItWorks.jsx";
-import Contacts from "./static/Contacts.jsx";
+import HomePage from "./static/HomePage.jsx";
+import HowItWorksPage from "./static/HowItWorksPage.jsx";
+import ContactsPage from "./static/ContactsPage.jsx";
 import AssetsPage from "./static/AssetsPage.jsx";
 import AboutPage from "./static/AboutPage.jsx";
 
@@ -14,9 +14,9 @@ import Trackings from "./manage/Trackings.jsx";
 import Users from "./manage/Users.jsx";
 
 export { 
-    Home, 
-    HowItWorks, 
-    Contacts,
+    HomePage, 
+    HowItWorksPage, 
+    ContactsPage,
     AssetsPage,
     AboutPage, 
     Login,

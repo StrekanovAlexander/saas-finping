@@ -4,9 +4,9 @@ import AdminRoute from "./AdminRoute.jsx";
 import ControlPanelRoute from "./ControlPanelRoute.jsx"; 
 import { PublicLayout, PrivateLayout, ControlPanelLayout } from "../components/layouts/index.jsx";
 import { 
-    Home, 
-    HowItWorks,
-    Contacts,
+    HomePage, 
+    HowItWorksPage,
+    ContactsPage,
     AssetsPage,
     AboutPage,
     Login,
@@ -22,10 +22,10 @@ export default function() {
     return (
         <Routes>
             <Route element={<PublicLayout />}>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/assets" element={<AssetsPage />} />
-                <Route path="/how-it-works" element={<HowItWorks />} />
-                <Route path="/contacts" element={<Contacts />} />
+                <Route path="/how" element={<HowItWorksPage />} />
+                <Route path="/contacts" element={<ContactsPage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />

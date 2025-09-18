@@ -30,18 +30,18 @@ export default function Header() {
                     >
                         Assets
                     </Link>
-                    {/* <Link
-                        to="/how-it-works"
+                    <Link
+                        to="/how"
                         className="text-gray-600 hover:text-teal-600 transition"
                     >
                         How it works
-                    </Link> */}
-                    {/* <Link
+                    </Link>
+                    <Link
                         to="/contacts"
                         className="text-gray-600 hover:text-teal-600 transition"
                     >
                         Contacts
-                    </Link> */}
+                    </Link>
                     { user && 
                         <Link
                             to="/manage/trackings"
@@ -52,9 +52,9 @@ export default function Header() {
                     }
                     <Link
                         to="/about"
-                        className="text-teal-600 hover:text-teal-700 transition"
+                        className="text-gray-600 hover:text-teal-600 transition"
                     >
-                        About project
+                        About
                     </Link>
                 </nav>
                 {!user ? (
