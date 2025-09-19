@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useAuth } from "../../context/AuthContext.jsx";
@@ -18,44 +18,59 @@ export default function Header() {
                     <h2 className="text-xl font-bold text-teal-600">FinPing</h2>
                 </Link>
                 <nav className="hidden md:flex space-x-6 font-medium">
-                    <Link
+                    <NavLink
                         to="/"
-                        className="text-gray-600 hover:text-teal-600 transition"
+                        className={({ isActive }) =>
+                            isActive ? "text-teal-600"
+                            : "text-gray-600 hover:text-teal-600 transition"
+                        }
                     >
                         Home
-                    </Link>
-                    <Link
+                    </NavLink>
+                    <NavLink
                         to="/assets"
-                        className="text-gray-600 hover:text-teal-600 transition"
+                        className={({ isActive }) =>
+                            isActive ? "text-teal-600"
+                            : "text-gray-600 hover:text-teal-600 transition"
+                        }
                     >
                         Assets
-                    </Link>
-                    <Link
+                    </NavLink>
+                    <NavLink
                         to="/how"
-                        className="text-gray-600 hover:text-teal-600 transition"
+                        className={({ isActive }) =>
+                            isActive ? "text-teal-600"
+                            : "text-gray-600 hover:text-teal-600 transition"
+                        }
                     >
                         How it works
-                    </Link>
-                    <Link
+                    </NavLink>
+                    <NavLink
                         to="/contacts"
-                        className="text-gray-600 hover:text-teal-600 transition"
+                        className={({ isActive }) =>
+                            isActive ? "text-teal-600"
+                            : "text-gray-600 hover:text-teal-600 transition"
+                        }
                     >
                         Contacts
-                    </Link>
+                    </NavLink>
+                    <NavLink
+                        to="/about"
+                        className={({ isActive }) =>
+                            isActive ? "text-teal-600"
+                            : "text-gray-600 hover:text-teal-600 transition"
+                        }
+                    >
+                        About
+                    </NavLink>
                     { user && 
                         <Link
                             to="/manage/trackings"
-                            className="text-gray-600 hover:text-teal-600 transition"
+                            className="text-orange-500 hover:text-orange-600 transition"
                         >
-                            Trackings
+                            Control Panel
                         </Link> 
                     }
-                    <Link
-                        to="/about"
-                        className="text-gray-600 hover:text-teal-600 transition"
-                    >
-                        About
-                    </Link>
                 </nav>
                 {!user ? (
                     <Link

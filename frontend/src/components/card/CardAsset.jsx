@@ -18,7 +18,7 @@ function CardAsset({ title, description, data }) {
               <th className="px-4 py-3 font-medium">Name</th>
               <th className="px-4 py-3 font-medium text-end">Price</th>
               <th className="px-4 py-3 font-medium text-end">Trend</th>
-              <th className="px-4 py-3 font-medium text-start">Last Updated</th>
+              <th className="px-4 py-3 font-medium text-start hidden sm:table-cell">Last Updated</th>
             </tr>
           </thead>
           <tbody>
@@ -52,7 +52,7 @@ function CardAsset({ title, description, data }) {
                       <span className="text-gray-500">No change</span>
                     )}
                    </td>
-                  <td className="px-4 py-3 text-gray-400 text-xs text-start">
+                  <td className="px-4 py-3 text-gray-400 text-xs text-start hidden sm:table-cell">
                     {formatDate(el.lastUpdated)}
                   </td>
                 </tr>
