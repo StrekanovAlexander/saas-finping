@@ -105,11 +105,12 @@ export default function Notifications() {
                         <table className="w-full border-collapse rounded-xl overflow-hidden">
                             <thead className="bg-gray-100 text-gray-600 text-sm">
                                 <tr>
-                                    <th className="text-left py-3 px-4">Name</th>
-                                    <th className="text-left py-3 px-4">Type</th>
-                                    <th className="text-left py-3 px-4">Source</th>
+                                    <th className="text-left py-3 px-4 hidden md:table-cell">Name</th>
+                                    <th className="text-left py-3 px-4">Symbol</th>
+                                    <th className="text-left py-3 px-4 hidden md:table-cell">Type</th>
+                                    <th className="text-left py-3 px-4 hidden md:table-cell">Source</th>
                                     <th className="text-left py-3 px-4">Message</th>
-                                    <th className="text-left py-3 px-4">Channel</th>
+                                    <th className="text-left py-3 px-4 hidden md:table-cell">Channel</th>
                                     <th className="text-left py-3 px-4">Created at</th>
                                 </tr>
                             </thead>
@@ -120,11 +121,12 @@ export default function Notifications() {
                                         key={idx}
                                         className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition"
                                     >
-                                        <td className="py-3 px-4 font-medium">{t.Asset.name} ({t.Asset.symbol})</td>
-                                        <td className="py-3 px-4 capitalize">{t.Asset.type}</td>
-                                        <td className="py-3 px-4 capitalize">{t.Asset.dataSource}</td>
+                                        <td className="py-3 px-4 font-medium hidden md:table-cell">{t.Asset.name}</td>
+                                        <td className="py-3 px-4 font-medium">{t.Asset.symbol}</td>
+                                        <td className="py-3 px-4 capitalize hidden md:table-cell">{t.Asset.type}</td>
+                                        <td className="py-3 px-4 capitalize hidden md:table-cell">{t.Asset.dataSource}</td>
                                         <td className="py-3 px-4">{t.message}</td>
-                                        <td className="py-3 px-4">{t.channel}</td>
+                                        <td className="py-3 px-4 hidden md:table-cell">{t.channel}</td>
                                         <td className="px-3 py-4 text-xs text-gray-400">{formatDate(t.createdAt)}</td>
                                     </tr>
                                 ))

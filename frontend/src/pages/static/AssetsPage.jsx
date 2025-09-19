@@ -50,7 +50,7 @@ export default function AssetsPage() {
   const minutesAgo = Math.floor((new Date() - lastUpdated) / 60000);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="w-full md:container md:mx-auto md:px-4 py-8">
       <h1 className="text-3xl font-bold text-gray-800 mb-2">Assets</h1>
       <p className="text-gray-500 mb-6">
         Track prices across cryptocurrencies, commodities and fiat currencies
@@ -105,7 +105,8 @@ export default function AssetsPage() {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse rounded-xl overflow-hidden">
+          {/* <table className="w-full border-collapse rounded-xl overflow-hidden"> */}
+          <table className="hidden md:table w-full border-collapse rounded-xl overflow-hidden">
             <thead className="bg-gray-100 text-gray-600 text-sm">
               <tr>
                 <th className="text-left py-3 px-4">Name</th>
@@ -120,26 +121,26 @@ export default function AssetsPage() {
             </thead>
             <tbody className="text-sm">
               {filteredAssets.length > 0 ? (
-                filteredAssets.map((asset, idx) => {
-                  const isUp = asset.price > asset.previousPrice;
-                  const isDown = asset.price < asset.previousPrice;
-                  const change = asset.price - asset.previousPrice;
-                  const percent =  ((change / asset.previousPrice) * 100).toPrecision(3);
+                filteredAssets.map((el) => {
+                  const isUp = el.price > el.previousPrice;
+                  const isDown = el.price < el.previousPrice;
+                  const change = el.price - el.previousPrice;
+                  const percent =  ((change / el.previousPrice) * 100).toPrecision(3);
 
                   return (
                     <tr
-                      key={idx}
+                      key={el.id}
                       className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition"
                     >
-                      <td className="py-3 px-4 font-medium">{asset.name}</td>
-                      <td className="py-3 px-4">{asset.symbol}</td>
-                      <td className="py-3 px-4 capitalize">{asset.type}</td>
-                      <td className="py-3 px-4 capitalize">{asset.dataSource}</td>
+                      <td className="py-3 px-4 font-medium">{el.name}</td>
+                      <td className="py-3 px-4 font-medium">{el.symbol}</td>
+                      <td className="py-3 px-4 capitalize">{el.type}</td>
+                      <td className="py-3 px-4 capitalize">{el.dataSource}</td>
                       <td className="py-3 px-4 text-right">
-                        { formatNumber(asset.price) }
+                        { formatNumber(el.price) }
                       </td>
                       <td className="py-3 px-4 text-right">
-                        { formatNumber(asset.previousPrice) }
+                        { formatNumber(el.previousPrice) }
                       </td>
                       <td className="py-3 px-4 text-right">
                         {isUp && (
@@ -158,7 +159,7 @@ export default function AssetsPage() {
                           <span className="text-gray-500">No change</span>
                         )}
                       </td>
-                      <td className="py-3 px-4 text-right">{ formatDate(asset.lastUpdated) }</td>
+                      <td className="py-3 px-4 text-right">{ formatDate(el.lastUpdated) }</td>
                     </tr>
                   );
                 })
@@ -174,6 +175,45 @@ export default function AssetsPage() {
               )}
             </tbody>
           </table>
+          {/* Mobile */}
+          {filteredAssets.map((el) => {
+            const isUp = el.price > el.previousPrice;
+            const isDown = el.price < el.previousPrice;
+            const change = el.price - el.previousPrice;
+            const percent =  ((change / el.previousPrice) * 100).toPrecision(3);
+            return (
+              <div key={el.id} className="space-y-4 md:hidden mb-3">
+                <div className="border rounded-lg p-4 bg-white grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm"><span className="text-gray-600">Symbol:</span> <span className="font-semibold">{el.symbol}</span></p>
+                    <p className="text-sm"><span className="text-gray-600">Price:</span> <span className="font-semibold">{formatNumber(el.price)}</span></p>
+                    <p className="text-sm"><span className="text-gray-600">Prev. price:</span> <span className="font-semibold">{formatNumber(el.previousPrice)}</span></p>
+                  </div>
+                  <div>
+                    <p className="text-gray-600 text-sm">{formatDate(el.updatedAt)}</p>
+                    <p className="text-sm">
+                      {isUp && (
+                        <span className="flex items-center justify-start text-green-600">
+                          <ArrowUpRight className="h-4 w-4 mr-1" />
+                          { percent }%
+                        </span>
+                      )}
+                      {isDown && (
+                        <span className="flex items-center justify-start text-red-600">
+                          <ArrowDownRight className="h-4 w-4 mr-1" />
+                          { percent }%
+                        </span>
+                      )}
+                      {!isUp && !isDown && (
+                        <span className="text-gray-500">No change</span>
+                      )}
+                    </p>
+                  </div>
+                </div>
+              </div> 
+            )}
+          )} 
+          {/* Mobile End */}      
         </div>
       </div>
       )}
