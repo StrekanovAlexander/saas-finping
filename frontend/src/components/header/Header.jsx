@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Settings } from 'lucide-react';
 import { useAuth } from "../../context/AuthContext.jsx";
 import NavMobile from './NavMobile.jsx';
 
@@ -63,14 +63,6 @@ export default function Header() {
                     >
                         About
                     </NavLink> */}
-                    { user && 
-                        <Link
-                            to="/manage/trackings"
-                            className="text-orange-500 hover:text-orange-600 transition"
-                        >
-                            Control Panel
-                        </Link> 
-                    }
                 </nav>
                 {!user ? (
                     <Link
@@ -80,8 +72,10 @@ export default function Header() {
                         Log in
                     </Link>
                 ) : (
-                    <div className="flex items-center">
-                        <span className="text-sm text-gray-400">{ user.email }</span>
+                    <div className="flex items-center gap-1">
+                        <Link to="/manage/trackings">
+                          <Settings className="w-5 h-5 text-gray-600 hover:text-teal-600" />
+                        </Link>
                         <button
                             onClick={logout}
                             className="hidden md:flex ml-4 px-4 py-2 rounded-lg bg-gray-100 text-sm font-medium text-gray-700 hover:bg-teal-600 hover:text-white transition"
