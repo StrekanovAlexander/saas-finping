@@ -84,7 +84,7 @@ export default function Trackings() {
     }
     
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="w-full md:container md:mx-auto md:px-4 md:py-8">
             {/* Header */}
             <div className="flex items-center justify-between mb-2">
                 <h1 className="text-3xl font-bold text-gray-800">Trackings</h1>
@@ -151,14 +151,15 @@ export default function Trackings() {
                         <table className="w-full border-collapse rounded-xl overflow-hidden">
                             <thead className="bg-gray-100 text-gray-600 text-sm">
                                 <tr>
-                                    <th className="text-left py-3 px-4">Name</th>
-                                    <th className="text-left py-3 px-4">Type</th>
-                                    <th className="text-left py-3 px-4">Source</th>
-                                    <th className="text-right py-3 px-4">Curr. Price</th>
+                                    <th className="text-left py-3 px-4 hidden md:table-cell">Name</th>
+                                    <th className="text-left py-3 px-4">Symbol</th>
+                                    <th className="text-left py-3 px-4 hidden md:table-cell">Type</th>
+                                    <th className="text-left py-3 px-4 hidden md:table-cell">Source</th>
+                                    <th className="text-right py-3 px-4 hidden md:table-cell">Curr.Price</th>
                                     <th className="text-center py-3 px-4">Direction</th>
                                     <th className="text-right py-3 px-4">Threshold</th>
                                     <th className="text-center py-3 px-4">Active</th>
-                                    <th className="text-left py-3 px-4">Last Updated</th>
+                                    <th className="text-left py-3 px-4 hidden md:table-cell">Last Updated</th>
                                     <th className="text-left py-3 px-4"></th>
                                 </tr>
                             </thead>
@@ -169,10 +170,11 @@ export default function Trackings() {
                                         key={idx}
                                         className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition"
                                     >
-                                        <td className="py-3 px-4 font-medium">{t.Asset.name} ({t.Asset.symbol})</td>
-                                        <td className="py-3 px-4 capitalize">{t.Asset.type}</td>
-                                        <td className="py-3 px-4 capitalize">{t.Asset.dataSource}</td>
-                                        <td className="py-3 px-4 text-right">
+                                        <td className="py-3 px-4 font-medium hidden md:table-cell">{t.Asset.name}</td>
+                                        <td className="py-3 px-4 font-medium">{t.Asset.symbol}</td>
+                                        <td className="py-3 px-4 capitalize hidden md:table-cell">{t.Asset.type}</td>
+                                        <td className="py-3 px-4 capitalize hidden md:table-cell">{t.Asset.dataSource}</td>
+                                        <td className="py-3 px-4 text-right hidden md:table-cell">
                                             {formatNumber(t.price)}
                                         </td>
                                         <td className="py-3 px-4">
@@ -195,7 +197,7 @@ export default function Trackings() {
                                         <td className="py-3 px-4 text-center">
                                             <input type="radio" checked={t.active} readOnly className="accent-teal-600" />
                                         </td>
-                                        <td className="px-4 py-3 text-gray-400 text-xs text-left">{formatDate(t.updatedAt)}</td>
+                                        <td className="px-4 py-3 text-gray-400 text-xs text-left hidden md:table-cell">{formatDate(t.updatedAt)}</td>
                                             <td>
                                                 <Trash2 
                                                     className="w-5 h-5 text-gray-400 hover:text-orange-500 hover:cursor-pointer" 

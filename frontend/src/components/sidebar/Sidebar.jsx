@@ -17,7 +17,7 @@ function Sidebar() {
   const location = useLocation();
 
   return (
-    <aside className="w-full md:w-64 bg-white rounded-2xl shadow-md flex flex-col flex-shrink-0 self-start">
+    <aside className="w-full mb-4 md:w-64 bg-white rounded-2xl shadow-md flex flex-col flex-shrink-0 self-start">
       <div className="px-6 py-4 border-b border-gray-200">
         <h3 className="text-xl font-bold text-teal-600">Control Panel</h3>
       </div>

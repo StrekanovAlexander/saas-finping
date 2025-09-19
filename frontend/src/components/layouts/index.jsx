@@ -34,9 +34,11 @@ export function ControlPanelLayout() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
-      <div className="container mx-auto flex flex-1 px-4 py-6 gap-6">
-        <Sidebar />
-        <main className="flex-1 p-6">
+      <div className="container mx-auto flex flex-1 px-4 py-6 gap-6 flex-col md:flex-row">
+        <aside className="w-full md:w-64 flex flex-col flex-shrink-0 self-start">
+          <Sidebar />
+        </aside>
+        <main className="w-full md:flex-1 md:p-6">
           <Outlet />
         </main>
       </div>
