@@ -54,7 +54,7 @@ export default function Header() {
                     >
                         Contacts
                     </NavLink>
-                    <NavLink
+                    {/* <NavLink
                         to="/about"
                         className={({ isActive }) =>
                             isActive ? "text-teal-600"
@@ -62,7 +62,7 @@ export default function Header() {
                         }
                     >
                         About
-                    </NavLink>
+                    </NavLink> */}
                     { user && 
                         <Link
                             to="/manage/trackings"
