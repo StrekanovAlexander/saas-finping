@@ -110,7 +110,7 @@ export default function AssetsPage() {
           <table className="hidden md:table w-full border-collapse rounded-xl overflow-hidden">
             <thead className="bg-gray-100 text-gray-500 text-sm">
               <tr>
-                <th className="py-3 px-4 uppercase">Name</th>
+                <th className="text-left py-2 px-4 uppercase">Name</th>
                 <th className="text-right py-2 px-4 uppercase">Price</th>
                 <th className="text-right py-2 px-4 uppercase">Trend</th>
                 <th className="text-right py-2 px-4 uppercase">Previous</th>
@@ -127,25 +127,25 @@ export default function AssetsPage() {
                       key={el.id}
                       className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition"
                     >
-                      <td className="px-3 py-2 flex items-center gap-3">
+                      <td className="px-3 py-3 flex items-center gap-3">
                         <Icon icon={el.icon} />
                         <div>
-                          <p className="font-bold text-md">{el.name}</p>
+                          <p className="font-semibold text-gray-800 leading-tight">{el.name}</p>
                           <p className="text-xs text-gray-500">{el.symbol}</p>
                         </div>
                       </td>
-                      <td className="px-3 py-2 text-right font-bold text-md">
+                      <td className="px-3 py-3 text-right font-semibold text-gray-800 leading-tight">
                         {formatNumber(el.price)}
                       </td>
-                      <td className="px-3 py-2 text-center">
+                      <td className="px-3 py-3 text-center">
                         <Trend price={el.price} previousPrice={el.previousPrice} />
                       </td>
-                      <td className="px-3 py-2 text-right text-gray-500">
+                      <td className="px-3 py-3 text-right text-gray-500">
                         { formatNumber(el.previousPrice) }
                       </td>
-                      <td className="text-center px-3 py-2 capitalize">{el.type}</td>
-                      <td className="text-center px-3 py-2 capitalize">{el.dataSource}</td>
-                      <td className="text-center px-3 py-2">{ formatDate(el.lastUpdated) }</td>
+                      <td className="text-center px-3 py-3 capitalize">{el.type}</td>
+                      <td className="text-center px-3 py-3 capitalize">{el.dataSource}</td>
+                      <td className="text-center px-3 py-3">{ formatDate(el.lastUpdated) }</td>
                     </tr>
                   );
                 })
