@@ -130,11 +130,11 @@ export default function AssetsPage() {
                       <td className="px-3 py-2 flex items-center gap-3">
                         <Icon icon={el.icon} />
                         <div>
-                          <p className="font-medium leading-tight">{el.name}</p>
+                          <p className="font-bold text-md">{el.name}</p>
                           <p className="text-xs text-gray-500">{el.symbol}</p>
                         </div>
                       </td>
-                      <td className="px-3 py-2 text-right font-medium leading-tight">
+                      <td className="px-3 py-2 text-right font-bold text-md">
                         {formatNumber(el.price)}
                       </td>
                       <td className="px-3 py-2 text-center">
