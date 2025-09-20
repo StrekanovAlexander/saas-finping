@@ -22,7 +22,7 @@ export default function AssetsPage() {
   useEffect(() => {
     async function fetchAssets() {
       try {
-        const url = "https://app.finping.space/api/assets";
+        const url = `${import.meta.env.VITE_API_URL}/assets`;
         const res = await fetch(url);
         if (!res.ok) throw new Error("Failed to fetch assets");
         const data = await res.json();

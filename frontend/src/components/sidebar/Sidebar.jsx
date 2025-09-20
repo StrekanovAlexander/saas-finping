@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { BarChart2, BellRing, User, Users } from "lucide-react";
+import { BarChart2, BellRing, User, Users, Settings } from "lucide-react";
 import { useAuth } from "../../context/AuthContext.jsx";
 
 const navItems = [
@@ -53,8 +53,8 @@ function Sidebar() {
           </Link>
         )))}
       </nav>
-      <div className="px-6 py-4 border-t border-gray-200 text-sm text-gray-400">
-        { user.email }
+      <div className="px-6 py-4 border-t border-gray-200 text-gray-400 flex items-center gap-1">
+        <Settings className="w-5 h-5" /> { user.email }
       </div>
     </aside>
   );

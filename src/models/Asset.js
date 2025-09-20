@@ -41,6 +41,10 @@ const Asset = sequelize.define('Asset', {
         allowNull: false,
         defaultValue: '3'
     },
+    icon: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
 }, {
     tableName: 'assets',
 });

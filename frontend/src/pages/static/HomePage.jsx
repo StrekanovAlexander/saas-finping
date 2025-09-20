@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CardAsset from "../../components/card/CardAsset.jsx";
+import CardsSection from "../../components/card/CardsSection.jsx";
 import Spinner from "../../components/spinner/Spinner.jsx";
 
 function HomePage() {
@@ -11,7 +11,7 @@ function HomePage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const url = "https://app.finping.space/api/assets";
+        const url = `${import.meta.env.VITE_API_URL}/assets`;
         const res = await fetch(url);
         if (!res.ok) throw new Error("Failed to fetch assets");
         const data = await res.json();
@@ -44,29 +44,15 @@ function HomePage() {
               performance, and make informed decisions with our easy-to-use
               platform.
             </p>
-            {/* Loading */}
             {loading && <div className="mb-10"><Spinner/></div>}
             {error && <p className="text-red-500">Error: {error}</p>}
-            {/* Cards */}
             {!loading && !error && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                <CardAsset 
-                  title="Cryptocurrencies" 
-                  description="Track Bitcoin, Ethereum, and more." 
-                  data={cryptos} 
-                />
-                <CardAsset 
-                  title="Commodities" 
-                  description="Stay updated on gold, oil, and natural gas." 
-                  data={commodities} 
-                />
-                <CardAsset 
-                  title="Currencies" 
-                  description="Monitor USD, EUR, JPY, and more."
-                  data={fiats}  
-                />
+              <div className="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-6">
+                <CardsSection data={cryptos} title="Cryptocurrencies" />
+                <CardsSection data={commodities} title="Commodities" />
+                <CardsSection data={fiats} title="Currencies" />
               </div>
-            )}  
+            )} 
             {/* CTA Button */}
             <div className="flex justify-center">
               <Link
