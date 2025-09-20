@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { ArrowUpRight, ArrowDownRight } from "lucide-react";
+import Card from "../../components/card/Card.jsx";
+import Icon from "../../components/card/Icon.jsx";
+import Trend from "../../components/card/Trend.jsx";
 import Spinner from "../../components/spinner/Spinner.jsx";
 import { formatDate, formatNumber } from "../../utils/formats.jsx"
 
@@ -105,61 +107,45 @@ export default function AssetsPage() {
         </div>
 
         <div className="overflow-x-auto">
-          {/* <table className="w-full border-collapse rounded-xl overflow-hidden"> */}
           <table className="hidden md:table w-full border-collapse rounded-xl overflow-hidden">
-            <thead className="bg-gray-100 text-gray-600 text-sm">
+            <thead className="bg-gray-100 text-gray-500 text-sm">
               <tr>
-                <th className="text-left py-3 px-4">Name</th>
-                <th className="text-left py-3 px-4">Symbol</th>
-                <th className="text-left py-3 px-4">Type</th>
-                <th className="text-left py-3 px-4">Source</th>
-                <th className="text-right py-3 px-4">Price</th>
-                <th className="text-right py-3 px-4">Prev. Price</th>
-                <th className="text-right py-3 px-4">Trend</th>
-                <th className="text-right py-3 px-4">Last Updated</th>
+                <th className="py-3 px-4 uppercase">Name</th>
+                <th className="text-right py-2 px-4 uppercase">Price</th>
+                <th className="text-right py-2 px-4 uppercase">Trend</th>
+                <th className="text-right py-2 px-4 uppercase">Previous</th>
+                <th className="text-center py-2 px-4 uppercase">Type</th>
+                <th className="text-center py-2 px-4 uppercase">Source</th>
+                <th className="text-center py-2 px-4 uppercase">Date</th>
               </tr>
             </thead>
             <tbody className="text-sm">
               {filteredAssets.length > 0 ? (
                 filteredAssets.map((el) => {
-                  const isUp = el.price > el.previousPrice;
-                  const isDown = el.price < el.previousPrice;
-                  const change = el.price - el.previousPrice;
-                  const percent =  ((change / el.previousPrice) * 100).toPrecision(3);
-
                   return (
                     <tr
                       key={el.id}
                       className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition"
                     >
-                      <td className="py-3 px-4 font-medium">{el.name}</td>
-                      <td className="py-3 px-4 font-medium">{el.symbol}</td>
-                      <td className="py-3 px-4 capitalize">{el.type}</td>
-                      <td className="py-3 px-4 capitalize">{el.dataSource}</td>
-                      <td className="py-3 px-4 text-right">
-                        { formatNumber(el.price) }
+                      <td className="px-3 py-2 flex items-center gap-3">
+                        <Icon icon={el.icon} />
+                        <div>
+                          <p className="font-medium leading-tight">{el.name}</p>
+                          <p className="text-xs text-gray-500">{el.symbol}</p>
+                        </div>
                       </td>
-                      <td className="py-3 px-4 text-right">
+                      <td className="px-3 py-2 text-right font-medium leading-tight">
+                        {formatNumber(el.price)}
+                      </td>
+                      <td className="px-3 py-2 text-center">
+                        <Trend price={el.price} previousPrice={el.previousPrice} />
+                      </td>
+                      <td className="px-3 py-2 text-right text-gray-500">
                         { formatNumber(el.previousPrice) }
                       </td>
-                      <td className="py-3 px-4 text-right">
-                        {isUp && (
-                          <span className="flex items-center justify-end text-green-600">
-                            <ArrowUpRight className="h-4 w-4 mr-1" />
-                            { percent }%
-                          </span>
-                        )}
-                        {isDown && (
-                          <span className="flex items-center justify-end text-red-600">
-                            <ArrowDownRight className="h-4 w-4 mr-1" />
-                            { percent }%
-                          </span>
-                        )}
-                        {!isUp && !isDown && (
-                          <span className="text-gray-500">No change</span>
-                        )}
-                      </td>
-                      <td className="py-3 px-4 text-right">{ formatDate(el.lastUpdated) }</td>
+                      <td className="text-center px-3 py-2 capitalize">{el.type}</td>
+                      <td className="text-center px-3 py-2 capitalize">{el.dataSource}</td>
+                      <td className="text-center px-3 py-2">{ formatDate(el.lastUpdated) }</td>
                     </tr>
                   );
                 })
@@ -176,47 +162,15 @@ export default function AssetsPage() {
             </tbody>
           </table>
           {/* Mobile */}
-          {filteredAssets.map((el) => {
-            const isUp = el.price > el.previousPrice;
-            const isDown = el.price < el.previousPrice;
-            const change = el.price - el.previousPrice;
-            const percent =  ((change / el.previousPrice) * 100).toPrecision(3);
-            return (
-              <div key={el.id} className="space-y-4 md:hidden mb-3">
-                <div className="border rounded-lg p-4 bg-white grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-sm"><span className="text-gray-600">Symbol:</span> <span className="font-semibold">{el.symbol}</span></p>
-                    <p className="text-sm"><span className="text-gray-600">Price:</span> <span className="font-semibold">{formatNumber(el.price)}</span></p>
-                    <p className="text-sm"><span className="text-gray-600">Prev. price:</span> <span className="font-semibold">{formatNumber(el.previousPrice)}</span></p>
-                  </div>
-                  <div>
-                    <p className="text-gray-600 text-sm">{formatDate(el.updatedAt)}</p>
-                    <p className="text-sm">
-                      {isUp && (
-                        <span className="flex items-center justify-start text-green-600">
-                          <ArrowUpRight className="h-4 w-4 mr-1" />
-                          { percent }%
-                        </span>
-                      )}
-                      {isDown && (
-                        <span className="flex items-center justify-start text-red-600">
-                          <ArrowDownRight className="h-4 w-4 mr-1" />
-                          { percent }%
-                        </span>
-                      )}
-                      {!isUp && !isDown && (
-                        <span className="text-gray-500">No change</span>
-                      )}
-                    </p>
-                  </div>
-                </div>
-              </div> 
+          <div className="flex flex-col gap-4 md:hidden">
+            {filteredAssets.map((el) => 
+              <Card key={el.id} item={el} />
             )}
-          )} 
+          </div>   
           {/* Mobile End */}      
-        </div>
-      </div>
-      )}
-    </div>
-  );
-}
+         </div>
+       </div>
+       )}
+     </div>
+   );
+ }

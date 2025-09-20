@@ -4,7 +4,7 @@ import { formatDate, formatNumber } from "../../utils/formats.jsx";
 
 function Card({ item }) {
     return (
-        <div className="rounded-2xl shadow-md p-4 flex flex-col justify-between hover:shadow-xl transition bg-white h-28">
+        <div className="rounded-2xl shadow p-4 flex flex-col justify-between hover:shadow-xl transition bg-white h-28">
             <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-2 w-2/3">
                     <Icon icon={item.icon} />
@@ -20,7 +20,7 @@ function Card({ item }) {
                     <Trend price={item.price} previousPrice={item.previousPrice} />
                 </div>
             </div>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-center text-xs text-gray-400 mt-1">
                 {formatDate(item.lastUpdated)}
             </p>
         </div>
