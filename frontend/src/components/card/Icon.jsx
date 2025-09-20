@@ -1,9 +1,11 @@
 import * as Icons from "lucide-react";
 
 const icons = {
+    Bean: Icons.Bean,
     Bitcoin: Icons.Bitcoin,
     CircleDot: Icons.CircleDot,
     Coins: Icons.Coins,
+    DollarSign: Icons.DollarSign,
     Droplet: Icons.Droplet,
     Euro: Icons.Euro, 
     JapaneseYen: Icons.JapaneseYen,
@@ -11,6 +13,8 @@ const icons = {
     Leaf: Icons.Leaf,
     Package: Icons.Package,
     PoundSterling: Icons.PoundSterling, 
+    SwissFranc: Icons.SwissFranc,
+    Wheat: Icons.Wheat
 };
 
 function Icon({ icon }) {
