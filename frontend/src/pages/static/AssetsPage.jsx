@@ -94,83 +94,82 @@ export default function AssetsPage() {
       {error && <p className="text-red-500">Error: {error}</p>}
 
       {!loading && !error && (
-      <div className="bg-white rounded-2xl shadow-md p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold text-gray-800">All Assets</h2>
-          <div className="flex items-center text-sm text-gray-500">
-            <span className="relative flex h-3 w-3 mr-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
-            </span>
-            Updated {minutesAgo === 0 ? "just now" : `${minutesAgo} min ago`}
+        <div className="bg-white rounded-2xl shadow-md p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold text-gray-800">All Assets</h2>
+            <div className="flex items-center text-sm text-gray-500">
+              <span className="relative flex h-3 w-3 mr-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
+              </span>
+              Updated {minutesAgo === 0 ? "just now" : `${minutesAgo} min ago`}
+            </div>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="hidden md:table w-full border-collapse rounded-xl overflow-hidden">
+              <thead className="bg-gray-100 text-gray-500 text-sm">
+                <tr>
+                  <th className="text-left py-2 px-4 uppercase">Name</th>
+                  <th className="text-right py-2 px-4 uppercase">Price</th>
+                  <th className="text-right py-2 px-4 uppercase">Trend</th>
+                  <th className="text-right py-2 px-4 uppercase">Previous</th>
+                  <th className="text-center py-2 px-4 uppercase">Type</th>
+                  <th className="text-center py-2 px-4 uppercase">Source</th>
+                  <th className="text-center py-2 px-4 uppercase">Date</th>
+                </tr>
+              </thead>
+              <tbody className="text-sm">
+                {filteredAssets.length > 0 ? (
+                  filteredAssets.map((el) => {
+                    return (
+                      <tr
+                        key={el.id}
+                        className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition"
+                      >
+                        <td className="px-3 py-3 flex items-center gap-3">
+                          <Icon icon={el.icon} />
+                          <div>
+                            <p className="font-semibold text-gray-800 leading-tight">{el.name}</p>
+                            <p className="text-xs text-gray-500">{el.symbol}</p>
+                          </div>
+                        </td>
+                        <td className="px-3 py-3 text-right font-semibold text-gray-800 leading-tight">
+                          {formatNumber(el.price)}
+                        </td>
+                        <td className="px-3 py-3 text-center">
+                          <Trend price={el.price} previousPrice={el.previousPrice} />
+                        </td>
+                        <td className="px-3 py-3 text-right text-gray-500">
+                          { formatNumber(el.previousPrice) }
+                        </td>
+                        <td className="text-center px-3 py-3 capitalize">{el.type}</td>
+                        <td className="text-center px-3 py-3 capitalize">{el.dataSource}</td>
+                        <td className="text-center px-3 py-3">{ formatDate(el.lastUpdated) }</td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td
+                      colSpan="8"
+                      className="py-6 text-center text-gray-500 italic"
+                    >
+                      No assets found
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+            {/* Mobile */}
+            <div className="flex flex-col gap-4 md:hidden">
+              {filteredAssets.map((el) => 
+                <Card key={el.id} item={el} />
+              )}
+            </div>   
+            {/* Mobile End */}      
           </div>
         </div>
-
-        <div className="overflow-x-auto">
-          <table className="hidden md:table w-full border-collapse rounded-xl overflow-hidden">
-            <thead className="bg-gray-100 text-gray-500 text-sm">
-              <tr>
-                <th className="text-left py-2 px-4 uppercase">Name</th>
-                <th className="text-right py-2 px-4 uppercase">Price</th>
-                <th className="text-right py-2 px-4 uppercase">Trend</th>
-                <th className="text-right py-2 px-4 uppercase">Previous</th>
-                <th className="text-center py-2 px-4 uppercase">Type</th>
-                <th className="text-center py-2 px-4 uppercase">Source</th>
-                <th className="text-center py-2 px-4 uppercase">Date</th>
-              </tr>
-            </thead>
-            <tbody className="text-sm">
-              {filteredAssets.length > 0 ? (
-                filteredAssets.map((el) => {
-                  return (
-                    <tr
-                      key={el.id}
-                      className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition"
-                    >
-                      <td className="px-3 py-3 flex items-center gap-3">
-                        <Icon icon={el.icon} />
-                        <div>
-                          <p className="font-semibold text-gray-800 leading-tight">{el.name}</p>
-                          <p className="text-xs text-gray-500">{el.symbol}</p>
-                        </div>
-                      </td>
-                      <td className="px-3 py-3 text-right font-semibold text-gray-800 leading-tight">
-                        {formatNumber(el.price)}
-                      </td>
-                      <td className="px-3 py-3 text-center">
-                        <Trend price={el.price} previousPrice={el.previousPrice} />
-                      </td>
-                      <td className="px-3 py-3 text-right text-gray-500">
-                        { formatNumber(el.previousPrice) }
-                      </td>
-                      <td className="text-center px-3 py-3 capitalize">{el.type}</td>
-                      <td className="text-center px-3 py-3 capitalize">{el.dataSource}</td>
-                      <td className="text-center px-3 py-3">{ formatDate(el.lastUpdated) }</td>
-                    </tr>
-                  );
-                })
-              ) : (
-                <tr>
-                  <td
-                    colSpan="8"
-                    className="py-6 text-center text-gray-500 italic"
-                  >
-                    No assets found
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-          {/* Mobile */}
-          <div className="flex flex-col gap-4 md:hidden">
-            {filteredAssets.map((el) => 
-              <Card key={el.id} item={el} />
-            )}
-          </div>   
-          {/* Mobile End */}      
-         </div>
-       </div>
-       )}
-     </div>
-   );
- }
+      )}
+    </div>
+  );
+}
