@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { BarChart3 } from "lucide-react";
 import Card from "../../components/card/Card.jsx";
 import Icon from "../../components/card/Icon.jsx";
 import Trend from "../../components/card/Trend.jsx";
 import Spinner from "../../components/spinner/Spinner.jsx";
+import FormChart from "../../components/modals/FormChart.jsx";
 import { formatDate, formatNumber } from "../../utils/formats.jsx"
 
 export default function AssetsPage() {
@@ -13,6 +15,8 @@ export default function AssetsPage() {
   const [assets, setAssets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isFormChartOpen, setIsFormChartOpen] = useState(false);
+  const [asset, setAsset] = useState(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -107,12 +111,13 @@ export default function AssetsPage() {
           </div>
           <div className="overflow-x-auto">
             <table className="hidden md:table w-full border-collapse rounded-xl overflow-hidden">
-              <thead className="bg-gray-100 text-gray-500 text-sm">
+              <thead className="bg-gray-100 text-gray-400 text-sm uppercase">
                 <tr>
-                  <th className="text-left py-2 px-4 uppercase">Name</th>
-                  <th className="text-right py-2 px-4 uppercase">Price</th>
+                  <th className="text-left py-2 px-4">Name</th>
+                  <th className="text-right py-2 px-4">Price</th>
                   <th className="text-right py-2 px-4 uppercase">Trend</th>
                   <th className="text-right py-2 px-4 uppercase">Previous</th>
+                  <th className="text-center py-2 px-4 uppercase">Chart</th>
                   <th className="text-center py-2 px-4 uppercase">Type</th>
                   <th className="text-center py-2 px-4 uppercase">Source</th>
                   <th className="text-center py-2 px-4 uppercase">Date</th>
@@ -142,9 +147,23 @@ export default function AssetsPage() {
                         <td className="px-3 py-3 text-right text-gray-500">
                           { formatNumber(el.previousPrice) }
                         </td>
+                        <td className="px-3 py-3 text-center">  
+                          <button
+                            onClick={() => {
+                              setAsset(el);
+                              setIsFormChartOpen(true);  
+                            }}
+                            className="inline-flex items-center px-3 py-1 bg-white border border-gray-300 
+                            rounded-lg shadow-sm hover:bg-gray-50 hover:border-teal-500 
+                            text-gray-700 transition focus:outline-none focus:ring-2 
+                            focus:ring-teal-500 focus:ring-offset-1"
+                          >
+                            <BarChart3 className="w-4 h-4 text-teal-600" />
+                          </button>
+                        </td>
                         <td className="text-center px-3 py-3 capitalize">{el.type}</td>
                         <td className="text-center px-3 py-3 capitalize">{el.dataSource}</td>
-                        <td className="text-center px-3 py-3">{ formatDate(el.lastUpdated) }</td>
+                        <td className="text-center px-3 py-3 text-gray-400 text-sm">{ formatDate(el.lastUpdated) }</td>
                       </tr>
                     );
                   })
@@ -160,6 +179,15 @@ export default function AssetsPage() {
                 )}
               </tbody>
             </table>
+            {isFormChartOpen && (
+              <FormChart 
+                item={asset}
+                onClose={() => {
+                  setAsset(null);
+                  setIsFormChartOpen(false);
+                }} 
+              />
+            )}
             {/* Mobile */}
             <div className="flex flex-col gap-4 md:hidden">
               {filteredAssets.map((el) => 

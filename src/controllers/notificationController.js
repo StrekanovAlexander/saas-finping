@@ -12,17 +12,6 @@ export const getNotifications = async (req, res) => {
     }
 };
 
-// export const deleteTracking = async (req, res) => {
-//     try {
-//         const tracking = await Tracking.findByPk(req.params.id);
-//         if (!tracking) return res.status(404).json({ error: 'Tracking not found' });
-//         await tracking.destroy();
-//         res.json({ message: 'Tracking deleted' });
-//     } catch (err) {
-//         res.status(500).json({ error: err.message });
-//     }
-// };
-
 export const getUserNotifications = async (req, res) => {
     try {
         const userId = req.user.id;

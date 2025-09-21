@@ -141,7 +141,6 @@ export default function FormCreateTracking({ onClose, onCreated }) {
                             <option value="below">Below</option>
                         </select>
                     </div>
-                    {/* Кнопки */}
                     <div className="flex justify-end gap-3 pt-4">
                         <button
                             type="button"
