@@ -1,6 +1,6 @@
 import pkg from 'sequelize';
 const { Op } = pkg;
-import { Asset } from '../models/index.js';
+import { Asset, AssetPrice } from '../models/index.js';
 import { fetchCoinGeckoPrices } from './apis/coingecko.js';
 import { fetchFXRates } from './apis/fxrates.js';
 import { fetchYahooPrices } from './apis/yahoo.js';
@@ -28,6 +28,7 @@ export async function updateAssetPrices() {
             asset.price = price;
             asset.lastUpdated = new Date();
             await asset.save();
+            await AssetPrice.create({ assetId: asset.id, price: price });
             console.log(`✅ [CoinGecko] Updated ${asset.name} (${asset.symbol}) → $${price}`);
         }
         // --- FxRates update ---
@@ -38,6 +39,7 @@ export async function updateAssetPrices() {
                 asset.price = price;
                 asset.lastUpdated = new Date();
                 await asset.save();
+                await AssetPrice.create({ assetId: asset.id, price: price });
                 console.log(`✅ [FXRatesAPI] Updated ${asset.name} (${asset.symbol}) → ${price}`);
             }
         }
@@ -49,6 +51,7 @@ export async function updateAssetPrices() {
                 asset.price = price;
                 asset.lastUpdated = new Date();
                 await asset.save();
+                await AssetPrice.create({ assetId: asset.id, price: price });
                 console.log(`✅ [Yahoo] Updated ${asset.name} (${asset.symbol}) → $${price}`);
             }
         }

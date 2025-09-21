@@ -1,4 +1,5 @@
 import Asset from './Asset.js';
+import AssetPrice from './AssetPrice.js';
 import Notification from './Notification.js';
 import Tracking from './Tracking.js';
 import User from './User.js';
@@ -15,4 +16,7 @@ Notification.belongsTo(User, { foreignKey: "userId" });
 Asset.hasMany(Notification, { foreignKey: "assetId" });
 Notification.belongsTo(Asset, { foreignKey: "assetId" });
 
-export { Asset, Tracking, User, Notification };
+Asset.hasMany(AssetPrice, { foreignKey: "assetId" });
+AssetPrice.belongsTo(Asset, { foreignKey: "assetId", onDelete: "CASCADE" });
+
+export { Asset, AssetPrice, Tracking, User, Notification };
