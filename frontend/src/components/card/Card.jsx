@@ -1,8 +1,13 @@
+import { useState } from "react";
+import { BarChart3 } from "lucide-react";
+import FormChart from "../modals/FormChart.jsx";
 import Icon from "./Icon.jsx";
 import Trend from "./Trend.jsx";
 import { formatDate, formatNumber } from "../../utils/formats.jsx";
 
 function Card({ item }) {
+    const [isFormChartOpen, setIsFormChartOpen] = useState(false);
+
     return (
         <div className="rounded-2xl shadow p-4 flex flex-col justify-between hover:shadow-xl transition bg-white h-28">
             <div className="flex items-center justify-between gap-4">
@@ -20,9 +25,27 @@ function Card({ item }) {
                     <Trend price={item.price} previousPrice={item.previousPrice} />
                 </div>
             </div>
-            <p className="text-center text-xs text-gray-400 mt-1">
-                {formatDate(item.lastUpdated)}
-            </p>
+            <div className="flex items-center justify-between">
+                <button
+                    onClick={() => setIsFormChartOpen(true)}
+                    className="inline-flex items-center px-3 py-1 bg-white border border-gray-300 
+                    rounded-lg shadow-sm hover:bg-gray-50 hover:border-teal-500 
+                    text-gray-700 transition focus:outline-none focus:ring-2 
+                    focus:ring-teal-500 focus:ring-offset-1"
+                >
+                    <BarChart3 className="w-5 h-5 mr-2 text-teal-600" />
+                    <span className="text-sm">View Chart</span>
+                </button>
+                <span className="text-xs text-gray-400">
+                    {formatDate(item.lastUpdated)}
+                </span>
+            </div>
+            {isFormChartOpen && (
+                <FormChart 
+                    item={item}
+                    onClose={() => setIsFormChartOpen(false)} 
+                />
+            )}
         </div>
     )   
 };
