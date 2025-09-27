@@ -47,14 +47,14 @@ export default function Footer() {
                 target="_blank"
                 className="text-gray-500 hover:text-teal-600 transition"
               >
-                <Github className="w-5 h-5" />
+                <img src="/icons/github-mark.svg" alt="GitHub" className="w-5 h-5" />
               </a>
               <a
-                href="https://www.facebook.com/profile.php?id=100004673166846"
+                href="https://www.linkedin.com/in/oleksandr-strekanov-94928a387"
                 target="_blank"
                 className="text-gray-500 hover:text-teal-600 transition"
               >
-                <Facebook className="w-5 h-5" />
+                <img src="/icons/InBug-Black.png" alt="LinkedIn" className="w-5 h-5" />
               </a>
             </div>
           </div>

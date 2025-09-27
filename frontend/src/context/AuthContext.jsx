@@ -8,9 +8,16 @@ export function useAuth() {
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem("user");
-    return savedUser ? JSON.parse(savedUser) : null;
+    try {
+      const savedUser = localStorage.getItem("user");
+      return savedUser ? JSON.parse(savedUser) : null;
+    } catch (err) {
+      console.warn("Failed to parse user from localStorage:", err);
+      localStorage.removeItem("user");
+      return null;
+    }
   });
+
   const [token, setToken] = useState(() => {
     return localStorage.getItem("token") || null;
   });
