@@ -48,22 +48,6 @@ export default function Footer() {
                 <span>Try it for free</span>
               </a>
             </div>
-            {/* <div className="flex space-x-4">
-              <a
-                href="https://github.com/StrekanovAlexander"
-                target="_blank"
-                className="text-gray-500 hover:text-teal-600 transition"
-              >
-                <img src="/icons/github-mark.svg" alt="GitHub" className="w-5 h-5" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/oleksandr-strekanov-94928a387"
-                target="_blank"
-                className="text-gray-500 hover:text-teal-600 transition"
-              >
-                <img src="/icons/InBug-Black.png" alt="LinkedIn" className="w-5 h-5" />
-              </a>
-            </div> */}
           </div>
         </div>
         <div className="border-t border-gray-200 pt-4 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
