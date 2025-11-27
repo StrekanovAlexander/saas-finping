@@ -40,8 +40,15 @@ export default function Footer() {
             </a>
           </div>
           <div>
-            <h3 className="text-gray-800 font-semibold mb-3">Follow me</h3>
-            <div className="flex space-x-4">
+            <h3 className="text-gray-800 font-semibold mb-3">Partners we recommend</h3>
+            <div>
+              <a href="https://lottometrics.app" target="_blank" rel="noopener noreferrer">
+                <strong>LottoMetrics</strong><br/>
+                Honest lottery results analytics<br/>
+                <span>Try it for free</span>
+              </a>
+            </div>
+            {/* <div className="flex space-x-4">
               <a
                 href="https://github.com/StrekanovAlexander"
                 target="_blank"
@@ -56,7 +63,7 @@ export default function Footer() {
               >
                 <img src="/icons/InBug-Black.png" alt="LinkedIn" className="w-5 h-5" />
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="border-t border-gray-200 pt-4 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
