@@ -20,25 +20,51 @@ function HowItWorksPage() {
     ];
 
     return (
-        <section className="bg-gray-50 py-20">
-            <div className="container mx-auto px-6 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
-                    How It Works
-                </h2>
-                <div className="grid md:grid-cols-3 gap-8">
-                    {steps.map((step, idx) => (
-                        <div
-                            key={idx}
-                            className="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center text-center hover:shadow-lg transition"
-                        >
-                            {step.icon}
-                            <h3 className="text-xl font-semibold mt-4 mb-2">{step.title}</h3>
-                            <p className="text-gray-600">{step.text}</p>
-                        </div>
-                    ))}
+        <div>
+            <section className="bg-gray-50 py-20">
+                <div className="container mx-auto px-6 text-center">
+                    <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
+                        How It Works
+                    </h1>
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {steps.map((step, idx) => (
+                            <div
+                                key={idx}
+                                className="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center text-center hover:shadow-lg transition"
+                            >
+                                {step.icon}
+                                <h3 className="text-xl font-semibold mt-4 mb-2">{step.title}</h3>
+                                <p className="text-gray-600">{step.text}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+            <section className="bg-gray-50">
+                <div className="container mx-auto px-6 text-center">
+                    <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-12">
+                        Recommended Tool
+                    </h2>
+                    <div className="flex justify-center">
+                    <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-center text-center max-w-md hover:shadow-lg transition">
+                        <img src="https://www.next-step.expert/images/svg/widgets.svg" alt="PhotoSweep icon" className="w-16 h-16 mb-4" />
+                        <h3 className="text-xl font-semibold mt-2 mb-2">PhotoSweep — Image Organizer for Windows</h3>
+                        <p className="text-gray-600 mb-6">
+                            Efficiently sort your photos and remove duplicates. Keep your image library organized and clutter-free.
+                        </p>
+                        <a 
+                        href="https://www.next-step.expert/tools/photosweep" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+                        >
+                            Get PhotoSweep
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     );
 }
 
